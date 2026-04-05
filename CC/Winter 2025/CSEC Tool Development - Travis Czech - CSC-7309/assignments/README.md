@@ -1,16 +1,13 @@
-# Assignments (PDFs Only)
+# Assignments
 
-- Place **sanitized** assignment PDFs here. Avoid PII, keys, or tokens.
-- Recommended naming: `AssignmentNN_<short-title>.pdf` (e.g., `Assignment01_BugHunt.pdf`).
-- Large artifacts: use Git LFS if files exceed typical Git size guidance (configured in `.gitattributes`).
+> [!NOTE]
+> Assignment PDFs are not published to this public repository to respect institutional copyright. This folder contains **student-authored writeups** documenting the work completed for each assignment.
 
-## Expected Assignments (from Weeks 1–6 content)
+## Assignment Index
 
-| # | Week | Title | Status |
-|---|---|---|---|
-| 1 | 5 | Bug Hunt (debugging exercise) | Referenced in Week 5 lecture; PDF pending upload |
-| — | 5 | Rust Book — Guessing Game Tutorial | External resource (no upload needed) |
+| # | Week | Title | Type | Document |
+|---|---|---|---|---|
+| 1 | 5 | Bug Hunt — Debugging Exercise | Debugging lab | [Assignment01_BugHunt.md](Assignment01_BugHunt.md) |
+| 2 | 5 | Guessing Game (Rust Book Ch. 2) | Guided tutorial | [Assignment02_GuessingGame.md](Assignment02_GuessingGame.md) |
+| 3 | 1–3 | Labs 1–3 (Environment, Ownership, Structs) | Hands-on labs | [Labs_1-3_Summary.md](Labs_1-3_Summary.md) |
 
-## Placeholder
-
-This folder is intentionally empty pending upload of sanitized assignment PDFs.

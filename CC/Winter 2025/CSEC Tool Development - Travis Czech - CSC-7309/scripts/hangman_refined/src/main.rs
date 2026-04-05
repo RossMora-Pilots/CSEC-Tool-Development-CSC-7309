@@ -131,6 +131,99 @@ impl Hangman {
     }
 }
 
+// ───────────────────────────────────────────────────────────
+// Unit Tests
+// ───────────────────────────────────────────────────────────
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /// Helper: create a Hangman game with a known word for deterministic testing.
+    fn game_with_word(word: &str, max_attempts: u8) -> Hangman {
+        Hangman {
+            word: word.chars().collect(),
+            guessed: HashSet::new(),
+            attempts_left: max_attempts,
+        }
+    }
+
+    #[test]
+    fn new_game_starts_in_playing_state() {
+        let game = game_with_word("rust", 6);
+        assert!(matches!(game.state(), GameState::Playing));
+    }
+
+    #[test]
+    fn correct_guess_does_not_reduce_attempts() {
+        let mut game = game_with_word("rust", 6);
+        game.make_guess('r');
+        assert_eq!(game.attempts_left, 6);
+        assert!(game.guessed.contains(&'r'));
+    }
+
+    #[test]
+    fn incorrect_guess_reduces_attempts() {
+        let mut game = game_with_word("rust", 6);
+        game.make_guess('z');
+        assert_eq!(game.attempts_left, 5);
+    }
+
+    #[test]
+    fn duplicate_guess_does_not_reduce_attempts() {
+        let mut game = game_with_word("rust", 6);
+        game.make_guess('z');
+        assert_eq!(game.attempts_left, 5);
+        game.make_guess('z'); // duplicate
+        assert_eq!(game.attempts_left, 5); // unchanged
+    }
+
+    #[test]
+    fn guessing_all_letters_wins() {
+        let mut game = game_with_word("hi", 6);
+        game.make_guess('h');
+        game.make_guess('i');
+        assert!(matches!(game.state(), GameState::Won));
+    }
+
+    #[test]
+    fn running_out_of_attempts_loses() {
+        let mut game = game_with_word("rust", 2);
+        game.make_guess('x');
+        game.make_guess('y');
+        assert!(matches!(game.state(), GameState::Lost));
+    }
+
+    #[test]
+    fn saturating_sub_prevents_underflow() {
+        let mut game = game_with_word("rust", 1);
+        game.make_guess('x'); // attempts_left → 0
+        assert_eq!(game.attempts_left, 0);
+        // Attempting another wrong guess should not underflow
+        game.make_guess('y'); // already at 0, duplicate-guarded by HashSet
+        assert_eq!(game.attempts_left, 0);
+    }
+
+    #[test]
+    fn display_word_masks_unguessed_letters() {
+        let game = game_with_word("rust", 6);
+        let display: String = game.word.iter()
+            .map(|&c| if game.guessed.contains(&c) { c } else { '_' })
+            .collect();
+        assert_eq!(display, "____");
+    }
+
+    #[test]
+    fn display_word_reveals_guessed_letters() {
+        let mut game = game_with_word("rust", 6);
+        game.make_guess('r');
+        game.make_guess('t');
+        let display: String = game.word.iter()
+            .map(|&c| if game.guessed.contains(&c) { c } else { '_' })
+            .collect();
+        assert_eq!(display, "r__t");
+    }
+}
+
 fn main() {
     // A list of possible words for the player to guess
     let words = ["rust", "hangman", "programming", "cipher", "encryption"];

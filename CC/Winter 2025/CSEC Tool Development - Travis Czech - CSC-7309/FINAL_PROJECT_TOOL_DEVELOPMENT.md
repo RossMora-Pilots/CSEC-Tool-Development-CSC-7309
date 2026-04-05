@@ -1,8 +1,9 @@
-# Final Project — Scoped Reflection on Tool Development
+# Final Project — Tool Development Methodology & Phase 1 Portfolio
 
 **Course:** CSEC Tool Development (CSC-7309) | **Term:** Winter 2025 | **Instructor:** Travis Czech
 
-> **Scope Notice:** This portfolio covers **Weeks 1–6** (pre-midterm). The second half of the course, including the formal final project, falls outside the content available in this snapshot. This document instead presents a **scoped reflection** on tool development methodology as taught and practiced through Week 6, and sketches the tool-development arc the course was pointing toward.
+> [!NOTE]
+> **Portfolio Scope:** This document covers **Phase 1** (Weeks 1–6, pre-midterm) of the CSEC Tool Development course. It presents the foundational Rust skills, security-tool methodology, and applied projects completed during the first half of the course. Phase 2 content (Weeks 7–12: network scanners, cryptography, advanced tool development) will extend this portfolio as materials become available.
 
 ---
 
@@ -66,29 +67,61 @@ The v1 → refined Hangman pattern (see [MIDTERM_PROJECT_SUMMARY.md](MIDTERM_PRO
 
 ## Applied Exercises Summary
 
-| Week | Exercise | Concepts Reinforced | Outcome |
-|---|---|---|---|
-| 1 | Hello, World (cargo new) | Toolchain end-to-end | ✅ Compiled & ran |
-| 2 | Variables & types walkthrough | Mutability, type inference | ✅ Demonstrated |
-| 3 | In-class simple keylogger study | Ownership in practical code | ✅ Reviewed |
-| 4 | Hangman v1 (live-coded) | Structs, methods, Vec | ✅ Working |
-| 4 | Hangman refined (refactor) | Enums, HashSet, idiomatic Rust | ✅ Working |
-| 5 | Bug Hunt (Assignment 1) | Compiler diagnostics, debugging | ⏳ Completed |
-| 5 | Guessing Game (Rust Book ch. 2) | stdin, match, loop, parse | ⏳ Completed |
-| 6 | Practice midterm | Sections 1–5 synthesis | ⏳ Completed |
+| Week | Exercise | Concepts Reinforced | Outcome | Evidence |
+|---|---|---|---|---|
+| 1 | Hello, World (cargo new) | Toolchain end-to-end | ✅ Compiled & ran | [Lab 1](assignments/Labs_1-3_Summary.md) |
+| 2 | Variables & types walkthrough | Mutability, type inference | ✅ Demonstrated | [Lab 1](assignments/Labs_1-3_Summary.md) |
+| 3 | In-class simple keylogger study | Ownership in practical code | ✅ Reviewed | [Keylogger Study](KEYLOGGER_STUDY_WEEK3.md) |
+| 3 | Ownership & borrowing exercises | Move, borrow, mutable borrow | ✅ Completed | [Lab 2](assignments/Labs_1-3_Summary.md) |
+| 4 | Hangman v1 (live-coded) | Structs, methods, Vec | ✅ Working | [Source](scripts/hangman_v1/src/main.rs) |
+| 4 | Hangman refined (refactor) | Enums, HashSet, idiomatic Rust | ✅ Working + tested | [Source](scripts/hangman_refined/src/main.rs) |
+| 5 | Bug Hunt (Assignment 1) | Compiler diagnostics, debugging | ✅ Completed | [Writeup](assignments/Assignment01_BugHunt.md) |
+| 5 | Guessing Game (Rust Book ch. 2) | stdin, match, loop, parse | ✅ Completed | [Source](scripts/guessing_game/src/main.rs) |
+| 6 | Practice midterm | Sections 1–5 synthesis | ✅ Completed | [Labs 1–3](assignments/Labs_1-3_Summary.md) |
 
 ## Skills Inventory — Validated to Week 6
 
-| Skill Area | Level Reached | Evidence |
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#2b6cb0'}}}%%
+graph LR
+    subgraph Proficient
+        A[Cargo Workflow]
+        B[Rust Syntax]
+        C[Documentation]
+    end
+    subgraph Intermediate
+        D[Memory Safety<br/>Reasoning]
+        E[Structs & Enums]
+        F[Pattern Matching]
+    end
+    subgraph Beginner+
+        G[stdlib Collections]
+        H[I/O & Parsing]
+        I[External Crates]
+    end
+    subgraph Conceptual
+        J[Security-Tool<br/>Architecture]
+        K[Concurrency]
+        L[Networking]
+    end
+
+    style Proficient fill:#38a169,color:#fff,stroke:#2f855a
+    style Intermediate fill:#2b6cb0,color:#fff,stroke:#2c5282
+    style Beginner+ fill:#d69e2e,color:#fff,stroke:#b7791f
+    style Conceptual fill:#718096,color:#fff,stroke:#4a5568
+```
+
+| Skill Area | Level | Evidence |
 |---|---|---|
-| **Rust syntax** | Intermediate | Hangman refined implementation |
-| **Memory safety reasoning** | Intermediate | Ownership/borrowing discussions |
-| **Cargo workflow** | Proficient | Multi-crate project structure |
-| **stdlib collections** | Beginner+ | `Vec`, `HashSet` used correctly |
-| **External crates** | Beginner | `rand` crate integrated |
-| **I/O & stdin parsing** | Beginner+ | Hangman input loop |
-| **Error handling** | Beginner | `.expect()`, `match Result` |
-| **Security-tool architecture** | Conceptual | Discussed, not yet implemented |
+| **Rust syntax** | ██████████ Proficient | Hangman refined + Guessing Game + 9 unit tests |
+| **Memory safety reasoning** | ████████░░ Intermediate | Ownership/borrowing labs + keylogger study |
+| **Cargo workflow** | ██████████ Proficient | 3 multi-crate projects with build automation |
+| **Pattern matching** | ████████░░ Intermediate | `match` on enum, Result, Ordering |
+| **stdlib collections** | ██████░░░░ Beginner+ | `Vec`, `HashSet` used correctly |
+| **External crates** | ██████░░░░ Beginner+ | `rand`, `chrono`, `evdev` studied |
+| **I/O & stdin parsing** | ██████░░░░ Beginner+ | Hangman + Guessing Game input loops |
+| **Error handling** | ██████░░░░ Beginner+ | `.expect()`, `match Result`, `?` operator |
+| **Security-tool architecture** | ████░░░░░░ Conceptual | Keylogger study + scanner previews |
 
 ## Reflection
 
@@ -98,15 +131,19 @@ Whether the course continued into network scanners, crypto tools, or malware ana
 
 **Personal takeaway:** I now read Rust compiler errors as helpful feedback rather than gatekeeping. The v1 → refined Hangman exercise was the moment that clicked. Given a real security-tool problem today, I would reach for Rust without hesitation for anything that touches memory, threads, or a network socket.
 
-## Future Work
+## Phase 2 Roadmap
 
-When additional course content becomes available, this portfolio should be extended with:
+This portfolio is actively maintained. The following items represent planned extensions as additional course content becomes available:
 
-- [ ] Post-midterm lecture summaries (Weeks 7–12)
-- [ ] Port scanner implementation (if covered)
-- [ ] Vulnerability scanner writeup (if covered)
-- [ ] Cryptography module notes (if covered)
-- [ ] Formal final-project writeup (replacing this scoped reflection)
+| Phase | Content | Status |
+|---|---|---|
+| **Phase 1** (this portfolio) | Weeks 1–6: Rust fundamentals, ownership, structs, Hangman, keylogger study | ✅ Complete |
+| **Phase 2a** | Weeks 7–9: Port scanner implementation, networking primitives | 🔜 Planned |
+| **Phase 2b** | Weeks 10–11: Vulnerability scanner, cryptography modules | 🔜 Planned |
+| **Phase 2c** | Week 12: Final project — integrated security tool | 🔜 Planned |
+
+> [!TIP]
+> **For hiring managers:** Phase 1 demonstrates the complete Rust foundation needed for security tool development. The skills validated here (ownership model, struct-based architecture, compiler-guided development, safe concurrency patterns) directly transfer to the advanced tools in Phase 2.
 
 ## Attribution
 

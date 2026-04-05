@@ -1,0 +1,16 @@
+# Clippy configuration for CSC-7309 portfolio projects
+#
+# Applies to all Cargo projects under CC/.../scripts/
+# Run with: cargo clippy -- -D warnings
+
+# Allow educational comments (we intentionally over-comment for learning)
+allow = [
+    "clippy::missing_docs_in_private_items",
+]
+
+# Warn on common issues
+warn = [
+    "clippy::needless_pass_by_value",
+    "clippy::redundant_closure",
+    "clippy::unused_self",
+]

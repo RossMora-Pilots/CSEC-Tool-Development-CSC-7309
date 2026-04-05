@@ -189,6 +189,30 @@ fn change(input: &mut String) {
 
 This prevents data races **at compile time** — a major security property.
 
+#### Ownership & Borrowing Visual Model
+
+```mermaid
+graph TD
+    A[Value Created<br/>let s = String::from] --> B{How is it used?}
+    B -->|"let s2 = s"| C[⚡ Move<br/>s is invalidated]
+    B -->|"let s2 = s.clone"| D[📋 Deep Copy<br/>both valid]
+    B -->|"fn foo&lpar;&s&rpar;"| E[📖 Immutable Borrow<br/>read only, original retained]
+    B -->|"fn foo&lpar;&mut s&rpar;"| F[✏️ Mutable Borrow<br/>write access, exclusive]
+    C --> G[s2 is sole owner]
+    G --> H[s2 drops → memory freed]
+    E --> I[Any number of &T at once]
+    F --> J[At most ONE &mut T at a time]
+
+    style C fill:#e53e3e,color:#fff
+    style D fill:#3182ce,color:#fff
+    style E fill:#38a169,color:#fff
+    style F fill:#d69e2e,color:#fff
+    style H fill:#718096,color:#fff
+```
+
+> [!NOTE]
+> This diagram is the **single most important concept** in the first half of the course. Every subsequent topic (structs, enums, collections, security tools) builds on these ownership rules.
+
 ### Stack vs. Heap (brief)
 
 - Stack: fixed-size, LIFO, fast (e.g., `i32`, `bool`, `char`)
@@ -197,6 +221,9 @@ This prevents data races **at compile time** — a major security property.
 ### In-Class Exercise
 
 A **simple keylogger** exercise was introduced as a cross-platform (Windows / Linux / macOS) study in how ownership and borrowing apply to practical tool code. The keylogger was presented as an academic exercise to be run only in an isolated VM.
+
+> [!WARNING]
+> The keylogger exercise is for **defensive education only**. See the full writeup: [KEYLOGGER_STUDY_WEEK3.md](KEYLOGGER_STUDY_WEEK3.md)
 
 ### Why This Matters for Security Tools
 

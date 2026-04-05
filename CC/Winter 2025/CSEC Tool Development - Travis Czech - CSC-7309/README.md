@@ -22,15 +22,15 @@
 
 | Document | Description |
 |---|---|
-| [WEEKS_1-6_RUST_FUNDAMENTALS_SUMMARY.md](WEEKS_1-6_RUST_FUNDAMENTALS_SUMMARY.md) | Synthesized weekly concepts (environment → structs) |
-| [MIDTERM_PROJECT_SUMMARY.md](MIDTERM_PROJECT_SUMMARY.md) | Hangman game writeup with architecture + metrics |
-| [FINAL_PROJECT_TOOL_DEVELOPMENT.md](FINAL_PROJECT_TOOL_DEVELOPMENT.md) | Tool-development reflection (scoped to available content) |
-| [EVIDENCE_INDEX.md](EVIDENCE_INDEX.md) | Code, transcripts, and screenshot index |
-| [SCRIPTS_README.md](SCRIPTS_README.md) | Rust source code inventory and usage |
-| [assignments/](assignments/) | Sanitized assignment PDFs (as they become available) |
-| [scripts/](scripts/) | Student-authored Rust source (Hangman v1 + refined) |
-| [scripts-extra/](scripts-extra/) | External/reference materials |
-| [screenshots/](screenshots/) | Evidence images |
+| [WEEKS_1-6_RUST_FUNDAMENTALS_SUMMARY.md](WEEKS_1-6_RUST_FUNDAMENTALS_SUMMARY.md) | Synthesized weekly concepts with Mermaid diagrams |
+| [MIDTERM_PROJECT_SUMMARY.md](MIDTERM_PROJECT_SUMMARY.md) | Hangman game writeup with architecture diagrams + metrics |
+| [KEYLOGGER_STUDY_WEEK3.md](KEYLOGGER_STUDY_WEEK3.md) | 🔒 In-class keylogger security analysis (Week 3) |
+| [FINAL_PROJECT_TOOL_DEVELOPMENT.md](FINAL_PROJECT_TOOL_DEVELOPMENT.md) | Phase 1 methodology reflection + skills visualization |
+| [EVIDENCE_INDEX.md](EVIDENCE_INDEX.md) | Complete artifact index with 11 Mermaid diagrams |
+| [SCRIPTS_README.md](SCRIPTS_README.md) | Rust source code inventory (3 Cargo projects) |
+| [assignments/](assignments/) | Assignment writeups (Bug Hunt, Guessing Game, Labs 1–3) |
+| [scripts/](scripts/) | Student-authored Rust source (Hangman v1 + refined + Guessing Game) |
+| [scripts-extra/](scripts-extra/) | External/reference materials + instructor-shared URLs |
 
 ## Weekly Schedule (12-Week Course, Content Available Weeks 1–6)
 
@@ -77,4 +77,6 @@ By the end of Week 6, the following outcomes are documented in this portfolio:
 
 - **Original course content, lectures, and exercises:** © Travis Czech / Cambrian College, 2025
 - **Student-authored summaries, annotations, and adaptations:** Ross Moravec, 2025
-- **Responsible-use notice:** Security-tool concepts (e.g., keylogger study, scanner previews) are academic and intended strictly for defensive learning. Do not use against systems you do not own or lack explicit authorization to test.
+
+> [!CAUTION]
+> Security-tool concepts (e.g., keylogger study, scanner previews) are academic and intended strictly for **defensive learning**. Do not use against systems you do not own or lack explicit authorization to test. See [KEYLOGGER_STUDY_WEEK3.md](KEYLOGGER_STUDY_WEEK3.md) for the full responsible-use framework.

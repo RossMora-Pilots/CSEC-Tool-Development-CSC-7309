@@ -1,8 +1,8 @@
 [package]
-name = "hangman_v1"
+name = "guessing_game"
 version = "0.1.0"
 edition = "2021"
-description = "CSC-7309 Week 4 — first-pass Hangman game demonstrating structs, methods, and basic game state"
+description = "CSC-7309 Week 5 — Guessing Game from The Rust Programming Language (Chapter 2)"
 authors = ["Ross Moravec (student, CSC-7309)"]
 license = "Educational"
 

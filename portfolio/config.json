@@ -13,10 +13,14 @@
   "metrics": {
     "weeks_covered": 6,
     "weeks_total_course": 12,
-    "scope_note": "Pre-midterm content only; portfolio represents Weeks 1-6 of a 12-week course",
-    "rust_cargo_projects": 2,
+    "scope_note": "Phase 1 content (pre-midterm); portfolio represents Weeks 1-6 of a 12-week course",
+    "rust_cargo_projects": 3,
     "source_lines_hangman_v1": 92,
-    "source_lines_hangman_refined": 181,
+    "source_lines_hangman_refined": 261,
+    "source_lines_guessing_game": 70,
+    "unit_tests": 9,
+    "mermaid_diagrams": 11,
+    "assignment_writeups": 3,
     "external_crates_used": 1,
     "stdlib_collections_used": 2,
     "concepts_covered": [
@@ -31,7 +35,10 @@
       "enums",
       "pattern-matching",
       "stdin-io",
-      "error-handling-basic"
+      "error-handling-basic",
+      "unit-testing",
+      "keylogger-analysis",
+      "security-tool-architecture"
     ]
   },
   "evidence": {
@@ -45,6 +52,17 @@
     ],
     "final_reflection": [
       "FINAL_PROJECT_TOOL_DEVELOPMENT.md"
+    ],
+    "security_analysis": [
+      "KEYLOGGER_STUDY_WEEK3.md"
+    ],
+    "assignments": [
+      "assignments/Assignment01_BugHunt.md",
+      "assignments/Assignment02_GuessingGame.md",
+      "assignments/Labs_1-3_Summary.md"
+    ],
+    "additional_code": [
+      "scripts/guessing_game/src/main.rs"
     ]
   },
   "skills": [
@@ -52,17 +70,32 @@
     "Memory Safety & Ownership Model",
     "Cargo (build tooling, package management)",
     "Custom Security Tool Development",
+    "Keylogger Architecture Analysis (defensive)",
     "Virtual Machine Usage for Tool Isolation",
     "Compiler-Guided Refactoring",
+    "Unit Testing (#[cfg(test)])",
     "Terminal Application Development",
     "Git & GitHub Portfolio Hygiene"
   ],
   "tools": {
     "languages": ["Rust", "Python (prerequisite)"],
-    "toolchain": ["Rustup", "Cargo", "rustc"],
+    "toolchain": ["Rustup", "Cargo", "rustc", "rustfmt", "clippy"],
     "editors": ["Visual Studio Code + Rust extension"],
     "runtime_crates": ["rand", "std::io", "std::collections::HashSet"],
+    "security_crates_studied": ["evdev", "chrono", "ctrlc"],
     "environment": ["Kali Linux (VM)", "Ubuntu (VM)", "Windows (VM)"]
+  },
+  "visualizations": {
+    "mermaid_diagrams": 11,
+    "diagram_types": ["graph TD", "graph LR", "stateDiagram-v2", "mindmap"],
+    "locations": [
+      "Root README (course progression, skills mindmap)",
+      "WEEKS summary (ownership model)",
+      "MIDTERM (program flow, state machine, v1-vs-refined)",
+      "FINAL_PROJECT (skills proficiency)",
+      "KEYLOGGER_STUDY (architecture, course context)",
+      "Assignments (debug flow, lab dependencies)"
+    ]
   },
   "references": [
     {"title": "The Rust Programming Language (Book)", "url": "https://doc.rust-lang.org/book/"},
@@ -70,6 +103,7 @@
     {"title": "The Cargo Book", "url": "https://doc.rust-lang.org/cargo/"},
     {"title": "The rand Crate Documentation", "url": "https://docs.rs/rand/"},
     {"title": "Rust Standard Library Documentation", "url": "https://doc.rust-lang.org/std/"},
-    {"title": "Rustup Documentation", "url": "https://rust-lang.github.io/rustup/"}
+    {"title": "Rustup Documentation", "url": "https://rust-lang.github.io/rustup/"},
+    {"title": "Rust Programming Course (YouTube, instructor-shared)", "url": "https://www.youtube.com/watch?v=4Dj09n5T67s&list=PLaYMx1eoXk4Lt8C2R8vFybJUy5E7OlEoh"}
   ]
 }

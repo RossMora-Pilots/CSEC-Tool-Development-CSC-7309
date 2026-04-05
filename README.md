@@ -34,6 +34,24 @@
 
 ## Key Topics Covered
 
+```mermaid
+graph LR
+    W1["🔧 Week 1<br/>Environment<br/>Setup"] --> W2["📝 Week 2<br/>Variables<br/>& Types"]
+    W2 --> W3["🔒 Week 3<br/>Ownership<br/>& Borrowing"]
+    W3 --> W4["🏗️ Week 4<br/>Structs<br/>& Enums"]
+    W4 --> W5["🐛 Week 5<br/>Applied<br/>Practice"]
+    W5 --> W6["📋 Week 6<br/>Midterm<br/>Review"]
+    W6 -.-> W7["🔜 Weeks 7-12<br/>Advanced<br/>Tools"]
+
+    style W1 fill:#2d3748,color:#fff
+    style W2 fill:#2d3748,color:#fff
+    style W3 fill:#c53030,color:#fff
+    style W4 fill:#2b6cb0,color:#fff
+    style W5 fill:#38a169,color:#fff
+    style W6 fill:#d69e2e,color:#fff
+    style W7 fill:#718096,color:#fff,stroke-dasharray: 5 5
+```
+
 | Topic | Weeks | Learning Outcomes |
 |---|---|---|
 | **Environment Setup** | 1 | Install Rustup toolchain, Cargo package manager, VS Code + extensions, configure isolated VM for tool development |
@@ -51,19 +69,22 @@
 407-Tool-Development/
 ├── CC/Winter 2025/CSEC Tool Development - Travis Czech - CSC-7309/
 │   ├── README.md                              — Course-level portfolio entry point
-│   ├── WEEKS_1-6_RUST_FUNDAMENTALS_SUMMARY.md — Synthesized weekly concepts
-│   ├── MIDTERM_PROJECT_SUMMARY.md             — Hangman game project writeup
-│   ├── FINAL_PROJECT_TOOL_DEVELOPMENT.md      — Final tool-dev reflection (scoped)
-│   ├── EVIDENCE_INDEX.md                      — Code examples + transcripts mapped
-│   ├── SCRIPTS_README.md                      — Rust source inventory
-│   ├── assignments/                           — Sanitized assignment PDFs (placeholder)
-│   ├── scripts/                               — Student-authored Rust code (Hangman)
-│   ├── scripts-extra/                         — External/reference materials
+│   ├── WEEKS_1-6_RUST_FUNDAMENTALS_SUMMARY.md — Synthesized weekly concepts + diagrams
+│   ├── MIDTERM_PROJECT_SUMMARY.md             — Hangman project (architecture + metrics)
+│   ├── KEYLOGGER_STUDY_WEEK3.md               — 🔒 Security tool analysis (Week 3)
+│   ├── FINAL_PROJECT_TOOL_DEVELOPMENT.md      — Phase 1 methodology + skills viz
+│   ├── EVIDENCE_INDEX.md                      — Complete artifact index (11 diagrams)
+│   ├── SCRIPTS_README.md                      — Rust source inventory (3 projects)
+│   ├── assignments/                           — Bug Hunt, Guessing Game, Labs 1–3
+│   ├── scripts/                               — Rust code (Hangman ×2 + Guessing Game)
+│   ├── scripts-extra/                         — External refs + instructor URLs
 │   └── screenshots/                           — Evidence images
 ├── docs/                                      — Pilot-level operations docs
 ├── portfolio/config.json                      — Metrics, skills, references
+├── rustfmt.toml                               — Rust formatting config
+├── clippy.toml                                — Rust linting config
 ├── scripts/                                   — PM automation (pm.sh + helpers)
-├── .github/workflows/                         — CI/CD (5 workflows)
+├── .github/workflows/                         — CI/CD (6 workflows)
 ├── templates/                                 — Reusable .tpl files
 ├── unified-skills/                            — Vendor-agnostic skill library
 ├── artifacts/                                 — Generated PM outputs
@@ -77,6 +98,29 @@
 
 ## Skills Demonstrated
 
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#2b6cb0'}}}%%
+mindmap
+  root((Skills))
+    Systems Programming
+      Rust Ownership Model
+      Borrowing & References
+      Structs & Enums
+      Pattern Matching
+    Memory Safety
+      Stack vs Heap
+      Move Semantics
+      Zero-Cost Abstractions
+    Security Tool Dev
+      Keylogger Analysis
+      VM Isolation
+      Defensive Mindset
+    Engineering Practice
+      Git & CI/CD
+      Automated Linting
+      Evidence-Driven Docs
+```
+
 - **Systems Programming:** Rust (ownership model, borrowing, lifetimes-lite, structs/enums, trait-adjacent patterns)
 - **Memory Safety:** Understanding of stack vs. heap, move semantics, zero-cost abstractions
 - **Tool Development Mindset:** Building bespoke security utilities rather than relying on off-the-shelf tools
@@ -88,7 +132,8 @@
 
 ## Responsible-Use Notice
 
-This repository contains educational material related to security tool development. Code examples and concepts (e.g., simple keylogger structure, scanner patterns) were studied in an academic, sandboxed context. **All published artifacts are intended for defensive education only.** Do not deploy against systems you do not own or have explicit authorization to test. Respect local laws and institutional policies.
+> [!CAUTION]
+> This repository contains educational material related to security tool development. Code examples and concepts (e.g., simple keylogger structure, scanner patterns) were studied in an academic, sandboxed context. **All published artifacts are intended for defensive education only.** Do not deploy against systems you do not own or have explicit authorization to test. Respect local laws (Canadian Criminal Code s. 342.1, CFAA) and institutional policies.
 
 ---
 

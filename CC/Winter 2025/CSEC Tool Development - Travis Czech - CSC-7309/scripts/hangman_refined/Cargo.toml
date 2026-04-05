@@ -7,4 +7,4 @@ authors = ["Ross Moravec (student, CSC-7309)"]
 license = "Educational"
 
 [dependencies]
-rand = "0.8"
+rand = "0.9"

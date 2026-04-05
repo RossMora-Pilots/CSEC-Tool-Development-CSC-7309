@@ -32,35 +32,56 @@ Build a single-player terminal Hangman game:
 
 ## Architecture
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                          main()                            │
-│  ┌─────────────────────────────────────────────────────┐    │
-│  │  words: [&str; 5]  →  let mut game = Hangman::new()  │   │
-│  └─────────────────────────────────────────────────────┘    │
-│                             │                              │
-│                             ▼                              │
-│  ┌─────────────────────────────────────────────────────┐    │
-│  │  loop { match game.state() { ... } }                │    │
-│  └─────────────────────────────────────────────────────┘    │
-│             │                   │                │         │
-│    ┌────────▼──────┐   ┌───────▼────────┐  ┌────▼──────┐    │
-│    │  Playing      │   │  Won           │  │  Lost     │    │
-│    │  display_word │   │  display_word  │  │  reveal   │    │
-│    │  read stdin   │   │  congratulate  │  │  word     │    │
-│    │  make_guess   │   │  break         │  │  break    │    │
-│    └───────────────┘   └────────────────┘  └───────────┘    │
-└─────────────────────────────────────────────────────────────┘
+### Program Flow
 
-              Data flow                     Storage
-              ─────────                     ───────
-  user char → make_guess(&mut self, c) → guessed: HashSet<char>
-                                          ↓ contains check
-                                       word: Vec<char>
-                                          ↓ subtraction
-                                       attempts_left: u8
-                                          ↓ transition
-                                       GameState (enum)
+```mermaid
+graph TD
+    M[main] --> W["words: [&str; 5]"]
+    W --> N["Hangman::new(&words, 6)"]
+    N --> L["loop { match game.state() }"]
+
+    L --> P{GameState::Playing}
+    L --> WN{GameState::Won}
+    L --> LS{GameState::Lost}
+
+    P --> D1[display_word]
+    D1 --> R[read stdin]
+    R --> G["make_guess(&mut self, char)"]
+    G --> L
+
+    WN --> D2[display_word]
+    D2 --> C["Congratulations! break"]
+
+    LS --> RV["Reveal word. break"]
+
+    style P fill:#2b6cb0,color:#fff
+    style WN fill:#38a169,color:#fff
+    style LS fill:#e53e3e,color:#fff
+```
+
+### State Machine
+
+```mermaid
+stateDiagram-v2
+    [*] --> Playing: Hangman::new()
+    Playing --> Playing: Correct guess (letter in word)
+    Playing --> Playing: Incorrect guess (attempts > 0)
+    Playing --> Won: All letters guessed
+    Playing --> Lost: attempts_left == 0
+    Won --> [*]: 🎉 Congratulations
+    Lost --> [*]: 💀 Game Over
+```
+
+### Data Flow
+
+```
+user char → make_guess(&mut self, c) → guessed: HashSet<char>
+                                        ↓ contains check
+                                     word: Vec<char>
+                                        ↓ subtraction
+                                     attempts_left: u8
+                                        ↓ transition
+                                     GameState (enum)
 ```
 
 ## Key Implementations
@@ -118,6 +139,37 @@ fn state(&self) -> GameState {
 
 ## v1 → Refined Changes (Improvements)
 
+```mermaid
+graph LR
+    subgraph "v1 (First Pass)"
+        A1["State: String<br/>'playing' / 'won' / 'lost'"]
+        A2["Guesses: Vec&lt;char&gt;<br/>O(n) lookup"]
+        A3["Underflow: -= 1<br/>⚠️ Can panic"]
+        A4["Input: First char only"]
+        A5["Loop: while + string compare"]
+    end
+
+    subgraph "Refined (Idiomatic)"
+        B1["State: enum GameState<br/>Compiler-checked"]
+        B2["Guesses: HashSet&lt;char&gt;<br/>O(1) lookup"]
+        B3["Underflow: saturating_sub<br/>✅ Safe"]
+        B4["Input: .to_lowercase()"]
+        B5["Loop: loop + match"]
+    end
+
+    A1 -->|"Type Safety"| B1
+    A2 -->|"Performance"| B2
+    A3 -->|"Safety"| B3
+    A4 -->|"UX"| B4
+    A5 -->|"Idiomatic"| B5
+
+    style A1 fill:#e53e3e,color:#fff
+    style A3 fill:#e53e3e,color:#fff
+    style B1 fill:#38a169,color:#fff
+    style B2 fill:#38a169,color:#fff
+    style B3 fill:#38a169,color:#fff
+```
+
 | Aspect | v1 | Refined | Reason |
 |---|---|---|---|
 | State | `String` | `enum GameState` | Type safety, compiler-checked |
@@ -125,6 +177,7 @@ fn state(&self) -> GameState {
 | Underflow | `x -= 1` | `.saturating_sub(1)` | No panic possible |
 | Case | First char only | `.to_lowercase()` | User experience |
 | Loop | `while` + `"playing"` | `loop` + `match` | Idiomatic Rust |
+| Tests | None | 9 unit tests | Validates state transitions |
 
 ## Metrics
 
