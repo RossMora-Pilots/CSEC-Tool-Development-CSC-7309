@@ -12,7 +12,7 @@
 // Run:    cargo run
 
 use std::io;
-use rand::seq::SliceRandom;
+use rand::seq::IndexedRandom;
 
 // Define the Hangman struct
 struct Hangman {
@@ -24,7 +24,7 @@ struct Hangman {
 impl Hangman {
     // Create a new game with a random word
     fn new(words: &[&str], max_attempts: u8) -> Self {
-        let chosen_word = words.choose(&mut rand::thread_rng()).unwrap();
+        let chosen_word = words.choose(&mut rand::rng()).unwrap();
         Hangman {
             word: chosen_word.chars().collect(),
             guessed: Vec::new(),

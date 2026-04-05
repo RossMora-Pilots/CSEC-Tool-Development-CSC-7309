@@ -25,7 +25,7 @@
 //
 use std::collections::HashSet;
 use std::io;
-use rand::seq::SliceRandom; // Make sure you have the `rand` crate in your Cargo.toml
+use rand::seq::IndexedRandom; // rand 0.9: SliceRandom was renamed to IndexedRandom
 
 // The GameState enum represents the different outcomes
 // the game can be in at any point in time.
@@ -58,7 +58,7 @@ impl Hangman {
         // choose() selects one random element from the slice
         // If the slice is empty, we call .expect() to panic with a friendly message
         let chosen_word = words
-            .choose(&mut rand::thread_rng())
+            .choose(&mut rand::rng())
             .expect("Words list cannot be empty.");
 
         // Collect each character of the chosen word into a vector

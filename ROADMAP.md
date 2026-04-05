@@ -17,17 +17,17 @@ This pilot creates a public, employer‑facing course portfolio repository for *
 ## Next
 - [ ] Add repo topics/description on GitHub (rust, cybersecurity, tool-development, portfolio, cambrian-college)
 - [ ] Publish repo to GitHub and set branch protection for `main`
-- [ ] Run `cargo check` on extracted Hangman sources and record passing build
-- [ ] Add architecture diagram (simple flow: course progression → tools)
+- [ ] Run `cargo check` on extracted Rust sources and record passing build (requires Rust toolchain install)
+- [x] Add architecture diagram (simple flow: course progression → tools)
 - [ ] Request instructor attribution/license confirmation (Travis Czech)
-- [ ] Capture a learning-reflection document for the Rust ownership model
+- [x] Capture a learning-reflection document for the Rust ownership model
 
 ## Later
 - [ ] Optional GitHub Pages landing page for the portfolio
 - [ ] Expand beyond Week 6 if additional course content becomes available
 - [ ] Cross-reference with Pilot 410 (Malware Analysis) for tool-dev continuity
-- [ ] Add optional Rust test harness for the Hangman examples
-- [ ] Publish responsible-use advisory for the keylogger lab reference
+- [x] Add optional Rust test harness for the Hangman examples
+- [x] Publish responsible-use advisory for the keylogger lab reference
 
 ## Milestones (Definition of Done)
 - [x] Course repo structure finalized and documented

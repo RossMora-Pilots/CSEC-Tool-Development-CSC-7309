@@ -157,6 +157,6 @@ These cannot be resolved without additional tooling or source material:
 
 1. **Week 3 Parts 2-3 transcripts** — Video files exist (~245 MB combined) but no transcript files. Likely contain ownership/borrowing deep-dive and keylogger walkthrough. Would require transcription tooling (e.g., Whisper).
 2. **Week 4 Part 2 transcript** — Similar: video exists (~193 MB), no transcript.
-3. **rand 0.9 API compatibility** — Hangman projects still use `rand::thread_rng()` and `SliceRandom::choose` which are 0.8 API patterns. Cargo.toml specifies 0.9. The code will compile with 0.8 features that are still available in 0.9, but a full API migration to the 0.9 idioms (e.g., `rand::rng()`) would be cleaner.
-4. **No live screenshots** — Without running the Rust programs and capturing terminal output, we can't add actual screenshots. The alternative-evidence approach in EVIDENCE_INDEX provides a professional workaround.
-5. **Weeks 7-12 content** — This is Phase 1 only (pre-midterm). When Phase 2 content is available, the same remediation pattern should be applied.
+3. **No live screenshots** — Without running the Rust programs and capturing terminal output, we can't add actual screenshots. The alternative-evidence approach in EVIDENCE_INDEX provides a professional workaround.
+4. **Weeks 7-12 content** — This is Phase 1 only (pre-midterm). When Phase 2 content is available, the same remediation pattern should be applied.
+5. **`cargo check` verification** — Rust toolchain not available in current environment. Code follows rand 0.9 API patterns (`IndexedRandom`, `rand::rng()`) and should compile, but build has not been verified. Install Rust via `rustup` and run `cargo check` in each project directory.
