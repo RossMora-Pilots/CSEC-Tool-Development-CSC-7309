@@ -25,7 +25,7 @@ Build a single-player terminal Hangman game:
 | 4 | Use an `enum` to represent mutually exclusive states | `enum GameState { Playing, Won, Lost }` |
 | 5 | Use `match` for exhaustive state handling | `match game.state() { … }` |
 | 6 | Demonstrate ownership & borrowing | `&[&str]`, `&self`, `&mut self` |
-| 7 | Use a third-party crate | `rand::seq::SliceRandom::choose` |
+| 7 | Use a third-party crate | `rand::seq::IndexedRandom::choose` (v0.9) |
 | 8 | Use a standard-library collection | `HashSet<char>` (refined) / `Vec<char>` (v1) |
 | 9 | Handle user input robustly | `io::stdin().read_line()` + trim + lowercase |
 | 10 | Prevent panics with safe arithmetic | `.saturating_sub(1)` (refined) |
@@ -74,14 +74,13 @@ stateDiagram-v2
 
 ### Data Flow
 
-```
-user char → make_guess(&mut self, c) → guessed: HashSet<char>
-                                        ↓ contains check
-                                     word: Vec<char>
-                                        ↓ subtraction
-                                     attempts_left: u8
-                                        ↓ transition
-                                     GameState (enum)
+```mermaid
+graph TD
+    A["user char"] --> B["make_guess(&mut self, c)"]
+    B --> C["guessed: HashSet&lt;char&gt;"]
+    C -->|contains check| D["word: Vec&lt;char&gt;"]
+    D -->|subtraction| E["attempts_left: u8"]
+    E -->|transition| F["GameState (enum)"]
 ```
 
 ## Key Implementations
@@ -90,11 +89,11 @@ user char → make_guess(&mut self, c) → guessed: HashSet<char>
 
 ```rust
 let chosen_word = words
-    .choose(&mut rand::thread_rng())
+    .choose(&mut rand::rng())
     .expect("Words list cannot be empty.");
 ```
 
-Uses the `rand` crate's `SliceRandom` trait. Returns `Option<&T>` — we `.expect()` with a message because an empty word list would be a programming error, not a runtime error the user could recover from.
+Uses the `rand` crate's `IndexedRandom` trait (v0.9+; previously `SliceRandom` in v0.8). Returns `Option<&T>` — we `.expect()` with a message because an empty word list would be a programming error, not a runtime error the user could recover from.
 
 ### 2. Guess Processing (refined version)
 

@@ -1,13 +1,13 @@
 name: Rust Check
 on:
   push:
-    branches: [ main ]
+    branches: [ master, main ]
     paths:
       - 'CC/**/scripts/**/*.rs'
       - 'CC/**/scripts/**/Cargo.toml'
       - '.github/workflows/rust-check.yml'
   pull_request:
-    branches: [ main ]
+    branches: [ master, main ]
     paths:
       - 'CC/**/scripts/**/*.rs'
       - 'CC/**/scripts/**/Cargo.toml'
@@ -22,9 +22,20 @@ jobs:
         project:
           - "CC/Winter 2025/CSEC Tool Development - Travis Czech - CSC-7309/scripts/hangman_v1"
           - "CC/Winter 2025/CSEC Tool Development - Travis Czech - CSC-7309/scripts/hangman_refined"
+          - "CC/Winter 2025/CSEC Tool Development - Travis Czech - CSC-7309/scripts/guessing_game"
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
       - name: cargo check
         working-directory: ${{ matrix.project }}
         run: cargo check --verbose
+
+  cargo-test:
+    runs-on: ubuntu-latest
+    needs: cargo-check
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: cargo test hangman_refined
+        working-directory: "CC/Winter 2025/CSEC Tool Development - Travis Czech - CSC-7309/scripts/hangman_refined"
+        run: cargo test --verbose

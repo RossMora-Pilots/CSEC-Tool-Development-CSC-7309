@@ -314,7 +314,7 @@ Implemented live in class using all of the concepts above:
 - `struct Hangman` with `word: Vec<char>`, `guessed: HashSet<char>`, `attempts_left: u8`
 - Constructor `Hangman::new(&words, max_attempts)` — associated function
 - Methods: `state() -> GameState`, `display_word(&self)`, `make_guess(&mut self, char)`
-- Uses `rand::seq::SliceRandom::choose` for random word selection
+- Uses `rand::seq::IndexedRandom::choose` for random word selection (rand 0.9)
 - Uses `std::collections::HashSet` for O(1) guessed-letter lookup
 - Uses `.saturating_sub(1)` to prevent underflow of `attempts_left`
 

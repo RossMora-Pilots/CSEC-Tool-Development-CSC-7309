@@ -158,3 +158,25 @@
 3. **`cargo test` on Windows GNU** — Tests pass when run from a path without spaces. The project paths contain spaces (`Winter 2025/CSEC Tool Development...`) which breaks MinGW's `dlltool`/`as` assembler. `cargo check` passes for all 3 projects. `cargo test` verified via temp copy (9/9 tests pass).
 4. **Weeks 7-12 content** — This is Phase 1 only (pre-midterm). When Phase 2 content is available, the same remediation pattern should be applied.
 5. **Labels/Issues sync** — Optional ROADMAP item not yet implemented.
+
+---
+
+## Post-Audit Remediation (Phase 3)
+
+After a comprehensive audit verified all 47+ claims from Phases 1 and 2, the following additional issues were discovered and fixed:
+
+### CI/CD Fixes
+- **5 CI workflows targeted `main` instead of `master`** — `rust-check.yml`, `gitleaks.yml`, `markdownlint.yml`, `portfolio-ci.yml`, `bootstrap-portfolio.yml` all had `branches: [ main ]` but the repo's default branch is `master`. Changed all to `[ master, main ]` for forward compatibility.
+- **`rust-check.yml` missing guessing_game** — Matrix only included hangman_v1 and hangman_refined. Added guessing_game as 3rd project.
+- **`rust-check.yml` had no test job** — Added `cargo-test` job that runs 9 unit tests on hangman_refined after check passes.
+
+### Content Accuracy Fixes
+- **EVIDENCE_INDEX: Week 3 video status corrected** — Changed from "⏳ Pending transcription" to specific status for each part (Part 2: corrupt moov atom, Part 3: no speech content).
+- **EVIDENCE_INDEX: Week 4 Part 2 transcript added** — New row showing successful transcription (79 lines, Whisper base model).
+- **EVIDENCE_INDEX: Screenshots section rewritten** — Replaced "toolchain not available" placeholder with verified compilation evidence table.
+- **MIDTERM: Data Flow converted to Mermaid** — Last remaining ASCII art diagram replaced with `graph TD` Mermaid diagram. Portfolio Mermaid count: 11 → 12.
+- **MIDTERM: rand API references updated** — Code example changed from `thread_rng()` to `rng()`, trait reference from `SliceRandom` to `IndexedRandom` (v0.9).
+- **WEEKS summary: `SliceRandom` → `IndexedRandom`** — Line 317 updated to match actual source code.
+- **SCRIPTS_README: `SliceRandom` → `IndexedRandom`** — Concepts list updated.
+- **Root README: workflow count 6 → 8** — Nav tree now reflects all 8 workflow files.
+- **config.json: Mermaid count 11 → 12** — Both metrics and visualizations sections updated; MIDTERM location string updated to include "data flow".

@@ -84,7 +84,7 @@ graph LR
 ├── rustfmt.toml                               — Rust formatting config
 ├── clippy.toml                                — Rust linting config
 ├── scripts/                                   — PM automation (pm.sh + helpers)
-├── .github/workflows/                         — CI/CD (6 workflows)
+├── .github/workflows/                         — CI/CD (8 workflows)
 ├── templates/                                 — Reusable .tpl files
 ├── unified-skills/                            — Vendor-agnostic skill library
 ├── artifacts/                                 — Generated PM outputs

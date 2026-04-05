@@ -9,7 +9,7 @@ This document summarizes the purpose and basic usage of each Rust source file an
 - **Entry point:** `src/main.rs`
 - **Lines of code:** 92 (incl. comments)
 - **Dependencies:** `rand = "0.9"`
-- **Concepts demonstrated:** `struct`, `impl`, associated functions, methods, `Vec<char>`, `SliceRandom::choose`
+- **Concepts demonstrated:** `struct`, `impl`, associated functions, methods, `Vec<char>`, `IndexedRandom::choose`
 - **Build & run:**
 
   ```bash

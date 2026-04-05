@@ -41,12 +41,13 @@ This index maps portfolio artifacts (code, summaries, transcripts, assignments) 
 
 | Diagram | Location | Type |
 |---|---|---|
-| Course progression flowchart | Root [README.md](../../README.md) | `graph LR` |
-| Skills mindmap | Root [README.md](../../README.md) | `mindmap` |
+| Course progression flowchart | Root [README.md](../../../README.md) | `graph LR` |
+| Skills mindmap | Root [README.md](../../../README.md) | `mindmap` |
 | Ownership & borrowing model | [WEEKS_1-6 Summary](WEEKS_1-6_RUST_FUNDAMENTALS_SUMMARY.md#ownership--borrowing-visual-model) | `graph TD` |
 | Hangman program flow | [MIDTERM_PROJECT_SUMMARY.md](MIDTERM_PROJECT_SUMMARY.md#program-flow) | `graph TD` |
 | Hangman state machine | [MIDTERM_PROJECT_SUMMARY.md](MIDTERM_PROJECT_SUMMARY.md#state-machine) | `stateDiagram-v2` |
 | v1 → Refined comparison | [MIDTERM_PROJECT_SUMMARY.md](MIDTERM_PROJECT_SUMMARY.md#v1--refined-changes-improvements) | `graph LR` |
+| Hangman data flow | [MIDTERM_PROJECT_SUMMARY.md](MIDTERM_PROJECT_SUMMARY.md#data-flow) | `graph TD` |
 | Skills proficiency levels | [FINAL_PROJECT](FINAL_PROJECT_TOOL_DEVELOPMENT.md#skills-inventory--validated-to-week-6) | `graph LR` |
 | Keylogger architecture | [KEYLOGGER_STUDY_WEEK3.md](KEYLOGGER_STUDY_WEEK3.md#architecture-overview) | `graph TD` |
 | Keylogger course context | [KEYLOGGER_STUDY_WEEK3.md](KEYLOGGER_STUDY_WEEK3.md#relationship-to-other-course-content) | `graph LR` |
@@ -62,8 +63,10 @@ This index maps portfolio artifacts (code, summaries, transcripts, assignments) 
 | 2 | `TranscripCSEC Tool Development - Travis Czech - CSC-7309 - 11821 - 2025-01-15.txt` | 68 KB | ✅ → WEEKS summary |
 | 3 | `CSEC Tool Development - Travis Czech - CSC-7309 - 11821 - 2025-01-22 - part 1.txt` | 39 KB | ✅ → WEEKS summary |
 | 3 | `In class Simple Keylogger Win, Linux, MacOS/Claude's simple linux.docx` | 20 KB | ✅ → KEYLOGGER_STUDY_WEEK3.md |
-| 3 | Video parts 2 & 3 (no transcript available) | ~245 MB | ⏳ Pending transcription |
+| 3 | Video part 2 (`.mp4`, ~11 MB) | 11 MB | ❌ Corrupt — moov atom missing (truncated recording) |
+| 3 | Video part 3 (`.mp4`, ~234 MB) | 234 MB | ❌ No speech — 40 min silent screen-share (confirmed via Whisper + volume analysis) |
 | 4 | `Transcript - CSEC Tool Development - Travis Czech.txt` | 38 KB | ✅ → WEEKS summary |
+| 4 | Video part 2 (`.mp4`) | ~200 MB | ✅ → Transcribed (79 lines, Whisper base model) |
 | 4 | `Hangman_v1.txt` | 2.8 KB | ✅ → scripts/hangman_v1/ |
 | 4 | `Refined Hangman with comments.txt` | 7.5 KB | ✅ → scripts/hangman_refined/ |
 | 5 | `TranscripCSEC Tool Development - Travis Czech - CSC-7309 - 11821 - 2025-02-05.txt` | 1.5 KB | ✅ → WEEKS summary |
@@ -72,14 +75,14 @@ This index maps portfolio artifacts (code, summaries, transcripts, assignments) 
 > [!NOTE]
 > Video lectures (~1.4 GB total) and .docx binaries are intentionally **not** published to this public repository. They are retained in the private archive for reference. Published artifacts are the sanitized code extractions and student-authored synthesis documents.
 
-## Screenshots
+## Screenshots & Compilation Evidence
 
 > [!NOTE]
-> Terminal screenshots will be captured when the Rust toolchain is available in the portfolio build environment. The Mermaid diagrams above serve as the primary visual evidence for this portfolio. See the `rust-check.yml` CI workflow for automated compilation verification.
+> Rust toolchain (1.94.1, stable-x86_64-pc-windows-gnu) is installed and all 3 Cargo projects pass `cargo check`. The `hangman_refined` project passes 9/9 unit tests. The `rust-check.yml` CI workflow provides automated, repeatable compilation verification on every push.
 
-| Planned Screenshot | Description | Alternative Evidence |
+| Evidence | Description | Status |
 |---|---|---|
-| Hangman terminal session | Game running in terminal | Mermaid state machine + source code |
-| `rustc --version` output | Toolchain verification | CI workflow `rust-check.yml` validates compilation |
-| Compiler ownership error | Borrow checker in action | Ownership diagram + Bug Hunt writeup |
-| `cargo build` output | Successful compilation | CI badge in root README |
+| `cargo check` (3 projects) | All projects compile cleanly | ✅ Verified locally |
+| `cargo test` (hangman_refined) | 9/9 unit tests pass | ✅ Verified locally |
+| `rust-check.yml` CI workflow | Automated compilation + test on push | ✅ Workflow configured |
+| Mermaid diagrams | Visual evidence of architecture & flow | ✅ 12 diagrams in portfolio |
