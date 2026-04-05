@@ -153,10 +153,8 @@
 
 ## Known Remaining Gaps
 
-These cannot be resolved without additional tooling or source material:
-
-1. **Week 3 Parts 2-3 transcripts** — Video files exist (~245 MB combined) but no transcript files. Likely contain ownership/borrowing deep-dive and keylogger walkthrough. Would require transcription tooling (e.g., Whisper).
-2. **Week 4 Part 2 transcript** — Similar: video exists (~193 MB), no transcript.
-3. **No live screenshots** — Without running the Rust programs and capturing terminal output, we can't add actual screenshots. The alternative-evidence approach in EVIDENCE_INDEX provides a professional workaround.
+1. **Week 3 Parts 2-3 transcripts** — Part 2 is a corrupt file (moov atom missing, 11MB truncated recording). Part 3 has no speech content (40 min of screen-share with background noise; confirmed via volume analysis and two whisper models). Neither can produce useful transcripts.
+2. **Week 4 Part 2 transcript** — ✅ Successfully transcribed (79 lines of lecture content after hallucination cleanup). Saved to source directory.
+3. **`cargo test` on Windows GNU** — Tests pass when run from a path without spaces. The project paths contain spaces (`Winter 2025/CSEC Tool Development...`) which breaks MinGW's `dlltool`/`as` assembler. `cargo check` passes for all 3 projects. `cargo test` verified via temp copy (9/9 tests pass).
 4. **Weeks 7-12 content** — This is Phase 1 only (pre-midterm). When Phase 2 content is available, the same remediation pattern should be applied.
-5. **`cargo check` verification** — Rust toolchain not available in current environment. Code follows rand 0.9 API patterns (`IndexedRandom`, `rand::rng()`) and should compile, but build has not been verified. Install Rust via `rustup` and run `cargo check` in each project directory.
+5. **Labels/Issues sync** — Optional ROADMAP item not yet implemented.

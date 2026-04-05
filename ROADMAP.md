@@ -15,11 +15,11 @@ This pilot creates a public, employer‑facing course portfolio repository for *
 - [x] Create EVIDENCE_INDEX and SCRIPTS_README
 
 ## Next
-- [ ] Add repo topics/description on GitHub (rust, cybersecurity, tool-development, portfolio, cambrian-college)
-- [ ] Publish repo to GitHub and set branch protection for `main`
-- [ ] Run `cargo check` on extracted Rust sources and record passing build (requires Rust toolchain install)
+- [x] Add repo topics/description on GitHub (rust, cybersecurity, tool-development, portfolio, cambrian-college)
+- [x] Publish repo to GitHub and set branch protection for `master`
+- [x] Run `cargo check` on extracted Rust sources and record passing build
 - [x] Add architecture diagram (simple flow: course progression → tools)
-- [ ] Request instructor attribution/license confirmation (Travis Czech)
+- [x] Request instructor attribution/license confirmation (Travis Czech)
 - [x] Capture a learning-reflection document for the Rust ownership model
 
 ## Later
@@ -34,7 +34,7 @@ This pilot creates a public, employer‑facing course portfolio repository for *
 - [x] Evidence artifacts scaffolded (roadmap.json generator, sessions index)
 - [x] Portfolio writeups complete with metrics and evidence links
 - [x] CI/CD workflows validate markdown, links, scripts, secrets
-- [ ] Public GitHub repo live with topics, description, and Actions passing
+- [x] Public GitHub repo live with topics, description, and Actions passing
 - [ ] Labels normalized and Issues synced (optional); mirrors Pilot 008/010 conventions
 
 ## Runbook
