@@ -1,0 +1,10 @@
+[package]
+name = "hangman_refined"
+version = "0.2.0"
+edition = "2021"
+description = "CSC-7309 Week 4 — refined Hangman game with enum-based GameState and HashSet<char> for guessed letters"
+authors = ["Ross Moravec (student, CSC-7309)"]
+license = "Educational"
+
+[dependencies]
+rand = "0.8"

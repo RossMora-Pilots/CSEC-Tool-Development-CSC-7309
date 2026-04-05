@@ -1,0 +1,30 @@
+name: Rust Check
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'CC/**/scripts/**/*.rs'
+      - 'CC/**/scripts/**/Cargo.toml'
+      - '.github/workflows/rust-check.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'CC/**/scripts/**/*.rs'
+      - 'CC/**/scripts/**/Cargo.toml'
+  workflow_dispatch:
+
+jobs:
+  cargo-check:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project:
+          - "CC/Winter 2025/CSEC Tool Development - Travis Czech - CSC-7309/scripts/hangman_v1"
+          - "CC/Winter 2025/CSEC Tool Development - Travis Czech - CSC-7309/scripts/hangman_refined"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: cargo check
+        working-directory: ${{ matrix.project }}
+        run: cargo check --verbose

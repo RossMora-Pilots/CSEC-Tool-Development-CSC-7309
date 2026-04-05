@@ -1,0 +1,10 @@
+[package]
+name = "hangman_v1"
+version = "0.1.0"
+edition = "2021"
+description = "CSC-7309 Week 4 — first-pass Hangman game demonstrating structs, methods, and basic game state"
+authors = ["Ross Moravec (student, CSC-7309)"]
+license = "Educational"
+
+[dependencies]
+rand = "0.8"

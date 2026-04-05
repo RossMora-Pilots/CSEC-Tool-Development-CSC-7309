@@ -1,0 +1,75 @@
+{
+  "course_path": "CC/Winter 2025/CSEC Tool Development - Travis Czech - CSC-7309",
+  "course": {
+    "code": "CSC-7309",
+    "section": "11821-002",
+    "title": "CSEC Tool Development",
+    "term": "Winter 2025",
+    "instructor": "Travis Czech",
+    "institution": "Cambrian College",
+    "location": "Sudbury, Ontario",
+    "program": "Postgraduate Cybersecurity Certificate"
+  },
+  "metrics": {
+    "weeks_covered": 6,
+    "weeks_total_course": 12,
+    "scope_note": "Pre-midterm content only; portfolio represents Weeks 1-6 of a 12-week course",
+    "rust_cargo_projects": 2,
+    "source_lines_hangman_v1": 92,
+    "source_lines_hangman_refined": 181,
+    "external_crates_used": 1,
+    "stdlib_collections_used": 2,
+    "concepts_covered": [
+      "environment-setup",
+      "variables-mutability",
+      "primitive-types",
+      "ownership",
+      "borrowing",
+      "references",
+      "structs",
+      "impl-methods",
+      "enums",
+      "pattern-matching",
+      "stdin-io",
+      "error-handling-basic"
+    ]
+  },
+  "evidence": {
+    "midterm_project": [
+      "scripts/hangman_v1/src/main.rs",
+      "scripts/hangman_refined/src/main.rs",
+      "MIDTERM_PROJECT_SUMMARY.md"
+    ],
+    "weekly_synthesis": [
+      "WEEKS_1-6_RUST_FUNDAMENTALS_SUMMARY.md"
+    ],
+    "final_reflection": [
+      "FINAL_PROJECT_TOOL_DEVELOPMENT.md"
+    ]
+  },
+  "skills": [
+    "Rust (systems programming)",
+    "Memory Safety & Ownership Model",
+    "Cargo (build tooling, package management)",
+    "Custom Security Tool Development",
+    "Virtual Machine Usage for Tool Isolation",
+    "Compiler-Guided Refactoring",
+    "Terminal Application Development",
+    "Git & GitHub Portfolio Hygiene"
+  ],
+  "tools": {
+    "languages": ["Rust", "Python (prerequisite)"],
+    "toolchain": ["Rustup", "Cargo", "rustc"],
+    "editors": ["Visual Studio Code + Rust extension"],
+    "runtime_crates": ["rand", "std::io", "std::collections::HashSet"],
+    "environment": ["Kali Linux (VM)", "Ubuntu (VM)", "Windows (VM)"]
+  },
+  "references": [
+    {"title": "The Rust Programming Language (Book)", "url": "https://doc.rust-lang.org/book/"},
+    {"title": "Rust by Example", "url": "https://doc.rust-lang.org/rust-by-example/"},
+    {"title": "The Cargo Book", "url": "https://doc.rust-lang.org/cargo/"},
+    {"title": "The rand Crate Documentation", "url": "https://docs.rs/rand/"},
+    {"title": "Rust Standard Library Documentation", "url": "https://doc.rust-lang.org/std/"},
+    {"title": "Rustup Documentation", "url": "https://rust-lang.github.io/rustup/"}
+  ]
+}
