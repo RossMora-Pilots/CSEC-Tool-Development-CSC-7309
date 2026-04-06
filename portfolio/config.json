@@ -18,8 +18,8 @@
     "source_lines_hangman_v1": 92,
     "source_lines_hangman_refined": 261,
     "source_lines_guessing_game": 70,
-    "unit_tests": 9,
-    "mermaid_diagrams": 12,
+    "unit_tests": 24,
+    "mermaid_diagrams": 16,
     "assignment_writeups": 3,
     "external_crates_used": 1,
     "stdlib_collections_used": 2,
@@ -86,11 +86,11 @@
     "environment": ["Kali Linux (VM)", "Ubuntu (VM)", "Windows (VM)"]
   },
   "visualizations": {
-    "mermaid_diagrams": 12,
+    "mermaid_diagrams": 16,
     "diagram_types": ["graph TD", "graph LR", "stateDiagram-v2", "mindmap"],
     "locations": [
       "Root README (course progression, skills mindmap)",
-      "WEEKS summary (ownership model)",
+      "WEEKS summary (ownership model, toolchain flow, type hierarchy, struct-impl-enum, guessing game state machine)",
       "MIDTERM (program flow, state machine, data flow, v1-vs-refined)",
       "FINAL_PROJECT (skills proficiency)",
       "KEYLOGGER_STUDY (architecture, course context)",

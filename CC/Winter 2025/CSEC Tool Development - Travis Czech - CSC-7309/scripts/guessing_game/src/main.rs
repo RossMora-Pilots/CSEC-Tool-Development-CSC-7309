@@ -1,21 +1,26 @@
-// CSC-7309 — Week 5 — Guessing Game
-//
-// Course: CSEC Tool Development, Winter 2025, Instructor Travis Czech
-// Purpose: Implementation of the Guessing Game from The Rust Programming
-// Language (Chapter 2). Reinforces concepts from Weeks 1–4:
-//
-//   - Variables and mutability (let, let mut)
-//   - Type conversion and shadowing
-//   - Error handling with Result<T, E> and match
-//   - Looping with loop { ... break }
-//   - External crate usage (rand)
-//   - Standard I/O (std::io::stdin)
-//   - Ordering enum and pattern matching
-//
-// Reference: https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html
-//
-// Build:  cargo build
-// Run:    cargo run
+//! # Guessing Game — CSC-7309 Week 5
+//!
+//! A number-guessing game implementing Chapter 2 of The Rust Programming Language.
+//! Demonstrates `stdin` input, `match` on `Result<T, E>` and `Ordering`, loop control,
+//! and variable shadowing.
+//!
+//! ## Course Context
+//!
+//! Course: CSEC Tool Development, Winter 2025, Instructor Travis Czech
+//! Purpose: Reinforces concepts from Weeks 1–4:
+//!
+//! - Variables and mutability (let, let mut)
+//! - Type conversion and shadowing
+//! - Error handling with Result<T, E> and match
+//! - Looping with loop { ... break }
+//! - External crate usage (rand)
+//! - Standard I/O (std::io::stdin)
+//! - Ordering enum and pattern matching
+//!
+//! Reference: https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html
+//!
+//! Build:  cargo build
+//! Run:    cargo run
 
 use std::io;
 use std::cmp::Ordering;
@@ -67,5 +72,63 @@ fn main() {
                 break;
             }
         }
+    }
+}
+
+/// Evaluate a guess against the secret number.
+/// Returns a human-readable hint string.
+fn evaluate_guess(guess: u32, secret: u32) -> &'static str {
+    match guess.cmp(&secret) {
+        Ordering::Less => "Too small!",
+        Ordering::Greater => "Too big!",
+        Ordering::Equal => "You win!",
+    }
+}
+
+// ───────────────────────────────────────────────────────────
+// Unit Tests
+// ───────────────────────────────────────────────────────────
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn guess_too_small() {
+        assert_eq!(evaluate_guess(10, 50), "Too small!");
+    }
+
+    #[test]
+    fn guess_too_big() {
+        assert_eq!(evaluate_guess(90, 50), "Too big!");
+    }
+
+    #[test]
+    fn guess_correct() {
+        assert_eq!(evaluate_guess(50, 50), "You win!");
+    }
+
+    #[test]
+    fn boundary_guess_one() {
+        assert_eq!(evaluate_guess(1, 1), "You win!");
+    }
+
+    #[test]
+    fn boundary_guess_hundred() {
+        assert_eq!(evaluate_guess(100, 100), "You win!");
+    }
+
+    #[test]
+    fn parse_valid_input() {
+        let input = "42\n";
+        let result: Result<u32, _> = input.trim().parse();
+        assert!(result.is_ok());
+        assert_eq!(result.unwrap(), 42);
+    }
+
+    #[test]
+    fn parse_invalid_input() {
+        let input = "abc\n";
+        let result: Result<u32, _> = input.trim().parse();
+        assert!(result.is_err());
     }
 }

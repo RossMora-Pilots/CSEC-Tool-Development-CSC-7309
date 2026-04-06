@@ -1,4 +1,6 @@
-# CSEC Tool Development — Travis Czech — CSC-7309
+# CSEC Tool Development — CSC-7309
+
+**Student Portfolio by Ross Moravec** | Instructor: Travis Czech | Cambrian College, Winter 2025
 
 ![Portfolio CI](https://github.com/RossMora/407-tool-development/actions/workflows/portfolio-ci.yml/badge.svg)
 

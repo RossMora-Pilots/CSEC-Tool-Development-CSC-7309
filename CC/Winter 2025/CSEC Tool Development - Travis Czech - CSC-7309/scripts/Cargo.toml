@@ -1,0 +1,7 @@
+[workspace]
+resolver = "2"
+members = [
+    "hangman_v1",
+    "hangman_refined",
+    "guessing_game",
+]

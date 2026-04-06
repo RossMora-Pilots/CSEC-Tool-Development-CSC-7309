@@ -75,6 +75,70 @@ While a guessing game is not a security tool, the patterns it teaches directly a
 - **Error handling without panics** — Security tools must not crash on bad input
 - **Controlled loops** — Avoid infinite loops; always have exit conditions
 
+---
+
+## My Implementation & Challenges
+
+### What I Built
+
+My implementation follows the Rust Book tutorial but includes an **attempt counter** that the tutorial doesn't add — I wanted to give the player feedback on how many guesses they used:
+
+```rust
+let mut attempts: u32 = 0;
+// ... inside the loop:
+attempts += 1;
+println!("You guessed: {guess}");
+// ... on win:
+println!("You win! 🎉 It took you {attempts} attempts.");
+```
+
+### Debugging Story: Shadowing Confusion
+
+The trickiest moment was variable **shadowing**. The tutorial reuses the name `guess` for both the String input and the parsed `u32`:
+
+```rust
+let mut guess = String::new();           // guess is a String
+io::stdin().read_line(&mut guess)?;
+let guess: u32 = guess.trim().parse()?;  // guess is now a u32!
+```
+
+I initially thought this would cause a "variable already declared" error (coming from other languages). Instead, Rust allows **shadowing** — the second `let guess` creates a new binding that hides the first. This felt strange at first, but I realized it avoids awkward names like `guess_str` and `guess_num` while keeping the type system happy.
+
+### Demo Output
+
+```text
+$ cargo run
+   Compiling guessing_game v0.1.0
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.45s
+     Running `target\debug\guessing_game.exe`
+=== Guessing Game ===
+I'm thinking of a number between 1 and 100.
+
+Please input your guess:
+50
+You guessed: 50
+Too big!
+
+Please input your guess:
+25
+You guessed: 25
+Too small!
+
+Please input your guess:
+37
+You guessed: 37
+Too small!
+
+Please input your guess:
+42
+You guessed: 42
+You win! 🎉 It took you 4 attempts.
+```
+
+### Time Spent
+
+Approximately 1 hour for the initial tutorial walkthrough, plus 30 minutes to add the attempt counter and write unit tests.
+
 ## Attribution
 
 Tutorial design: The Rust Programming Language (official book), Chapter 2. Course integration by Travis Czech (CSC-7309, Week 5). Student implementation and writeup by Ross Moravec.

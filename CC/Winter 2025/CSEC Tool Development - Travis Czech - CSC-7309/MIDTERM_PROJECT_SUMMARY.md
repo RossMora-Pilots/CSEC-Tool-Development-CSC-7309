@@ -221,3 +221,97 @@ graph LR
 ## Attribution
 
 Algorithm and initial live-coded implementation © Travis Czech (CSC-7309 lecture, 2025-01-29). Student refactoring, Cargo project structure, documentation, and analysis by Ross Moravec.
+
+---
+
+## Demo: Sample Game Session
+
+```text
+$ cargo run
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.08s
+     Running `target\debug\hangman_refined.exe`
+Welcome to Hangman!
+Word: ____
+Enter your guess:
+r
+Word: r___
+Enter your guess:
+u
+Word: ru__
+Enter your guess:
+z
+Incorrect guess! Attempts left: 5
+Word: ru__
+Enter your guess:
+s
+Word: rus_
+Enter your guess:
+t
+Word: rust
+Congratulations! You guessed the word.
+```
+
+> [!NOTE]
+> The word is randomly selected from `["rust", "hangman", "programming", "cipher", "encryption"]`. The session above shows a game where the target word was "rust".
+
+---
+
+## Unit Test Evidence
+
+The refined version includes 9 unit tests that validate all state transitions and edge cases. Here are representative examples:
+
+```rust
+/// Helper: create a Hangman game with a known word for deterministic testing.
+fn game_with_word(word: &str, max_attempts: u8) -> Hangman {
+    Hangman {
+        word: word.chars().collect(),
+        guessed: HashSet::new(),
+        attempts_left: max_attempts,
+    }
+}
+
+#[test]
+fn guessing_all_letters_wins() {
+    let mut game = game_with_word("hi", 6);
+    game.make_guess('h');
+    game.make_guess('i');
+    assert!(matches!(game.state(), GameState::Won));
+}
+
+#[test]
+fn running_out_of_attempts_loses() {
+    let mut game = game_with_word("rust", 2);
+    game.make_guess('x');
+    game.make_guess('y');
+    assert!(matches!(game.state(), GameState::Lost));
+}
+
+#[test]
+fn saturating_sub_prevents_underflow() {
+    let mut game = game_with_word("rust", 1);
+    game.make_guess('x'); // attempts_left → 0
+    assert_eq!(game.attempts_left, 0);
+    game.make_guess('y'); // already at 0, guarded by HashSet
+    assert_eq!(game.attempts_left, 0);
+}
+```
+
+```text
+$ cargo test
+   Compiling hangman_refined v0.2.0
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.62s
+     Running unittests src/main.rs
+
+running 9 tests
+test tests::new_game_starts_in_playing_state ... ok
+test tests::correct_guess_does_not_reduce_attempts ... ok
+test tests::incorrect_guess_reduces_attempts ... ok
+test tests::duplicate_guess_does_not_reduce_attempts ... ok
+test tests::guessing_all_letters_wins ... ok
+test tests::running_out_of_attempts_loses ... ok
+test tests::saturating_sub_prevents_underflow ... ok
+test tests::display_word_masks_unguessed_letters ... ok
+test tests::display_word_reveals_guessed_letters ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+```

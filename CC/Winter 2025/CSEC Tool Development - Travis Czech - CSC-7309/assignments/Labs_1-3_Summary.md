@@ -145,6 +145,72 @@ graph TD
 
 Each lab builds directly on the previous one. Lab 3's struct patterns are immediately applied in the Week 4 Hangman project, and Lab 2's ownership concepts appear in the Week 3 keylogger study.
 
+---
+
+## My Implementation & Challenges
+
+### Lab 1 — What Tripped Me Up
+
+The difference between `String` and `&str` was confusing at first. I tried to do:
+
+```rust
+let name: &str = String::from("Ross");  // ERROR: expected &str, found String
+```
+
+The compiler told me the types don't match. I learned that `String` is an owned, heap-allocated string, while `&str` is a borrowed reference to string data. The fix: either `let name: String = String::from("Ross")` or `let name: &str = "Ross"` (string literal is already a `&str`).
+
+### Lab 2 — When Ownership "Clicked"
+
+The moment ownership clicked was when I tried to pass a `String` to a function and then use it afterwards:
+
+```rust
+fn print_greeting(name: String) {
+    println!("Hello, {}!", name);
+}
+
+fn main() {
+    let my_name = String::from("Ross");
+    print_greeting(my_name);
+    println!("My name is: {}", my_name);  // ERROR: value moved
+}
+```
+
+```text
+error[E0382]: borrow of moved value: `my_name`
+ --> src/main.rs:8:35
+  |
+6 |     let my_name = String::from("Ross");
+  |         ------- move occurs because `my_name` has type `String`
+7 |     print_greeting(my_name);
+  |                    ------- value moved here
+8 |     println!("My name is: {}", my_name);
+  |                                ^^^^^^^ value borrowed here after move
+```
+
+The fix was to change the function to borrow: `fn print_greeting(name: &String)` and call it with `print_greeting(&my_name)`. This was the "house analogy" from the lecture in action — I was trying to give away my house and then walk back in.
+
+### Lab 3 — Connecting Structs to Hangman
+
+After completing the Rectangle exercise, I immediately saw how the same `struct` + `impl` + `::new()` pattern would apply to the Hangman game. The `is_square()` method taking `&self` was the same pattern as Hangman's `state(&self)` — an immutable borrow that checks data without modifying it. This connection made Lab 3 feel less like an isolated exercise and more like preparation for a real project.
+
+### Verification Evidence
+
+```text
+$ cd lab1 && cargo run
+   Compiling lab1 v0.1.0
+    Finished `dev` profile target(s) in 0.32s
+     Running `target/debug/lab1`
+Hello, world!
+y = 15
+
+$ cd ../lab3 && cargo run
+   Compiling lab3 v0.1.0
+    Finished `dev` profile target(s) in 0.28s
+     Running `target/debug/lab3`
+Area: 50
+Square? false
+```
+
 ## Attribution
 
 Lab design and exercises © Travis Czech / Cambrian College (CSC-7309, Winter 2025). Student summaries by Ross Moravec.

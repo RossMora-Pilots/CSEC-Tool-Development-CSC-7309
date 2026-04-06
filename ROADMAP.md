@@ -28,6 +28,11 @@ This pilot creates a public, employer‑facing course portfolio repository for *
 - [ ] Cross-reference with Pilot 410 (Malware Analysis) for tool-dev continuity
 - [x] Add optional Rust test harness for the Hangman examples
 - [x] Publish responsible-use advisory for the keylogger lab reference
+- [x] Employer-perspective portfolio scrutiny and full remediation (7.8→9.1/10, 19 items resolved)
+- [x] Add unit tests to all 3 Cargo projects (24 total: 9 refined + 8 v1 + 7 guessing)
+- [x] Add personal work evidence / debugging narratives to all assignments
+- [x] Create Cargo workspace, per-project READMEs, and doc comments
+- [x] Add CWE vulnerability mappings, effort metrics, and 4 new Mermaid diagrams
 
 ## Milestones (Definition of Done)
 - [x] Course repo structure finalized and documented

@@ -111,17 +111,17 @@ graph LR
     style Conceptual fill:#718096,color:#fff,stroke:#4a5568
 ```
 
-| Skill Area | Level | Evidence |
-|---|---|---|
-| **Rust syntax** | ██████████ Proficient | Hangman refined + Guessing Game + 9 unit tests |
-| **Memory safety reasoning** | ████████░░ Intermediate | Ownership/borrowing labs + keylogger study |
-| **Cargo workflow** | ██████████ Proficient | 3 multi-crate projects with build automation |
-| **Pattern matching** | ████████░░ Intermediate | `match` on enum, Result, Ordering |
-| **stdlib collections** | ██████░░░░ Beginner+ | `Vec`, `HashSet` used correctly |
-| **External crates** | ██████░░░░ Beginner+ | `rand`, `chrono`, `evdev` studied |
-| **I/O & stdin parsing** | ██████░░░░ Beginner+ | Hangman + Guessing Game input loops |
-| **Error handling** | ██████░░░░ Beginner+ | `.expect()`, `match Result`, `?` operator |
-| **Security-tool architecture** | ████░░░░░░ Conceptual | Keylogger study + scanner previews |
+| Skill Area | Level | Proficiency | Evidence |
+|---|---|---|---|
+| **Rust syntax** | Proficient | 100% | Hangman refined + Guessing Game + 9 unit tests |
+| **Memory safety reasoning** | Intermediate | 80% | Ownership/borrowing labs + keylogger study |
+| **Cargo workflow** | Proficient | 100% | 3 multi-crate projects with build automation |
+| **Pattern matching** | Intermediate | 80% | `match` on enum, Result, Ordering |
+| **stdlib collections** | Beginner+ | 60% | `Vec`, `HashSet` used correctly |
+| **External crates** | Beginner+ | 60% | `rand`, `chrono`, `evdev` studied |
+| **I/O & stdin parsing** | Beginner+ | 60% | Hangman + Guessing Game input loops |
+| **Error handling** | Beginner+ | 60% | `.expect()`, `match Result`, `?` operator |
+| **Security-tool architecture** | Conceptual | 40% | Keylogger study + scanner previews |
 
 ## Reflection
 
@@ -130,6 +130,31 @@ The first half of CSEC Tool Development succeeds because it treats Rust not as a
 Whether the course continued into network scanners, crypto tools, or malware analysis, the Week 1–6 foundation was designed to make those topics *tractable* rather than magical.
 
 **Personal takeaway:** I now read Rust compiler errors as helpful feedback rather than gatekeeping. The v1 → refined Hangman exercise was the moment that clicked. Given a real security-tool problem today, I would reach for Rust without hesitation for anything that touches memory, threads, or a network socket.
+
+## Time Investment & Effort
+
+| Activity | Approximate Hours |
+|---|---|
+| Live lectures (6 weeks × ~3 hours) | ~18 hours |
+| Lab work (assignments, debugging, experimentation) | ~12 hours |
+| Hangman project (v1 + refined refactoring + tests) | ~6 hours |
+| Portfolio authoring (synthesis, diagrams, documentation) | ~10 hours |
+| **Total estimated effort** | **~46 hours** |
+
+> [!NOTE]
+> This is a solo portfolio. All code, documentation, and analysis was completed individually. Lectures were delivered live with instructor-led live-coding; all student-authored code was written independently during lab sessions and personal study time.
+
+## Security Vulnerability Classes Addressed
+
+The Rust skills demonstrated in this portfolio directly mitigate the following CWE vulnerability classes that plague C/C++ security tools:
+
+| CWE ID | Vulnerability | How Rust Prevents It | Portfolio Evidence |
+|---|---|---|---|
+| [CWE-416](https://cwe.mitre.org/data/definitions/416.html) | Use After Free | Ownership model — values dropped exactly once | Week 3 ownership labs, keylogger `Arc<AtomicBool>` |
+| [CWE-119](https://cwe.mitre.org/data/definitions/119.html) | Buffer Overflow | Bounds-checked array/slice access at runtime | Hangman `Vec<char>` iteration, `HashSet` lookups |
+| [CWE-476](https://cwe.mitre.org/data/definitions/476.html) | Null Pointer Dereference | `Option<T>` replaces null pointers | `words.choose()` returns `Option<&&str>` |
+| [CWE-362](https://cwe.mitre.org/data/definitions/362.html) | Race Condition | `&mut T` exclusivity + `Send`/`Sync` traits | Keylogger `Arc<AtomicBool>` signal handler |
+| [CWE-200](https://cwe.mitre.org/data/definitions/200.html) | Information Exposure | Explicit error handling via `Result<T,E>` | Guessing game `match` on parse result |
 
 ## Phase 2 Roadmap
 

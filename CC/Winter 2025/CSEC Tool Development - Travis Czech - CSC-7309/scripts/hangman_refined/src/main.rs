@@ -27,8 +27,15 @@ use std::collections::HashSet;
 use std::io;
 use rand::seq::IndexedRandom; // rand 0.9: SliceRandom was renamed to IndexedRandom
 
-// The GameState enum represents the different outcomes
-// the game can be in at any point in time.
+/// Default word list for the Hangman game.
+const WORD_LIST: [&str; 5] = ["rust", "hangman", "programming", "cipher", "encryption"];
+
+/// Number of incorrect guesses allowed before game over.
+const DEFAULT_MAX_ATTEMPTS: u8 = 6;
+
+/// Represents the three possible states of a Hangman game.
+///
+/// Used with `match` for exhaustive state handling in the game loop.
 #[derive(Debug)]
 enum GameState {
     Playing, // The player is still guessing
@@ -36,12 +43,12 @@ enum GameState {
     Lost,    // The player has run out of attempts
 }
 
-// The Hangman struct holds all the information we need for the game:
-//
-// 1. word: the target word the player is trying to guess,
-//          stored as a vector of characters for easy iteration.
-// 2. guessed: a HashSet of characters the player has already guessed.
-// 3. attempts_left: how many incorrect guesses the player can still make.
+/// Core game state for the Hangman word-guessing game.
+///
+/// # Fields
+/// * `word` — Target word as `Vec<char>` for character-level iteration
+/// * `guessed` — `HashSet<char>` of all guessed letters (O(1) lookup)
+/// * `attempts_left` — Remaining incorrect guesses before game over
 struct Hangman {
     word: Vec<char>,
     guessed: HashSet<char>,
@@ -49,11 +56,14 @@ struct Hangman {
 }
 
 impl Hangman {
-    // The new() function creates a new game:
-    // - It chooses a random word from the provided &str slice
-    // - It converts that word into a Vec<char> so we can easily check each character.
-    // - It initializes an empty HashSet for guessed letters.
-    // - It sets the number of attempts the player has.
+    /// Creates a new Hangman game with a random word from the provided list.
+    ///
+    /// # Arguments
+    /// * `words` — Slice of candidate words
+    /// * `max_attempts` — Number of incorrect guesses allowed
+    ///
+    /// # Panics
+    /// Panics if `words` is empty.
     fn new(words: &[&str], max_attempts: u8) -> Self {
         // choose() selects one random element from the slice
         // If the slice is empty, we call .expect() to panic with a friendly message
@@ -72,10 +82,7 @@ impl Hangman {
         }
     }
 
-    // The state() function returns the current state of the game:
-    // - GameState::Won if every character in `word` is contained in `guessed`
-    // - GameState::Lost if attempts_left is 0
-    // - Otherwise, GameState::Playing
+    /// Returns the current game state based on guessed letters and remaining attempts.
     fn state(&self) -> GameState {
         // Check if all characters in the word have been guessed
         if self.word.iter().all(|&c| self.guessed.contains(&c)) {
@@ -91,9 +98,7 @@ impl Hangman {
         }
     }
 
-    // The display_word() function shows the current progress of the word to the player:
-    // e.g., if the word is "hangman" and the player has guessed 'a' and 'n',
-    //       it might display "_a_n_a_"
+    /// Prints the word with unguessed letters masked as underscores.
     fn display_word(&self) {
         // For each character in the `word`, if it's in `guessed`, show it;
         // otherwise, display an underscore '_'
@@ -107,10 +112,9 @@ impl Hangman {
         println!("Word: {}", display);
     }
 
-    // The make_guess() function takes in a single character and updates the game state:
-    // - If the character has not been guessed before, add it to `guessed`.
-    // - If that character isn't in `word`, decrement attempts_left.
-    // - If the character was already guessed, inform the user and don't change anything.
+    /// Processes a letter guess, updating the guessed set and attempt counter.
+    ///
+    /// Duplicate guesses are detected and reported without penalty.
     fn make_guess(&mut self, letter: char) {
         // Check if we've already guessed this character
         if !self.guessed.contains(&letter) {
@@ -226,10 +230,10 @@ mod tests {
 
 fn main() {
     // A list of possible words for the player to guess
-    let words = ["rust", "hangman", "programming", "cipher", "encryption"];
+    let words = WORD_LIST;
 
     // The maximum number of attempts (incorrect guesses) allowed
-    let max_attempts = 6;
+    let max_attempts = DEFAULT_MAX_ATTEMPTS;
 
     // Create a new Hangman game using our words list and maximum attempts
     let mut game = Hangman::new(&words, max_attempts);

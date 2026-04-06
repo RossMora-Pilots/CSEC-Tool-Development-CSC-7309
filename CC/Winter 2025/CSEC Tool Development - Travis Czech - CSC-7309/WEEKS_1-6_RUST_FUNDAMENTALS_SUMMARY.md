@@ -67,6 +67,21 @@ week1/
 
 A running `cargo run` that prints `Hello, world!` — confirming the toolchain works end-to-end.
 
+### Toolchain Setup Flow
+
+```mermaid
+graph LR
+    A["📥 Install Rustup<br/>curl ... | sh"] --> B["🔧 rustc + cargo<br/>installed"]
+    B --> C["📦 cargo new week1<br/>project scaffold"]
+    C --> D["📁 src/main.rs<br/>+ Cargo.toml"]
+    D --> E["▶️ cargo run<br/>Hello, world!"]
+    E --> F["✅ Toolchain<br/>verified"]
+
+    style A fill:#2d3748,color:#fff
+    style C fill:#2b6cb0,color:#fff
+    style F fill:#38a169,color:#fff
+```
+
 ---
 
 ## Week 2 — Variables, Mutability & Data Types (2025-01-15)
@@ -126,6 +141,34 @@ y *= 2;   // y = y * 2
 ### Security Context
 
 Choosing narrower integer types (e.g. `u8` for a byte buffer) reduces memory footprint — useful when building lightweight security tools that may run resource-constrained.
+
+### Rust Type System Hierarchy
+
+```mermaid
+graph TD
+    T[Rust Types] --> P[Primitives<br/>Stack-Allocated]
+    T --> C[Collections<br/>Heap-Allocated]
+
+    P --> INT["Integers<br/>i8, i16, i32, i64, i128<br/>u8, u16, u32, u64, u128"]
+    P --> FLT["Floats<br/>f32, f64"]
+    P --> BL["bool<br/>true / false"]
+    P --> CH["char<br/>4 bytes, Unicode"]
+
+    C --> STR["String<br/>growable, owned"]
+    C --> VEC["Vec&lt;T&gt;<br/>growable array"]
+    C --> HS["HashSet&lt;T&gt;<br/>O(1) lookup"]
+
+    P -.->|"Copy trait<br/>assignment = copy"| CP[let b = a;<br/>both valid ✅]
+    C -.->|"Move semantics<br/>assignment = move"| MV[let b = a;<br/>a invalidated ❌]
+
+    style P fill:#38a169,color:#fff
+    style C fill:#c53030,color:#fff
+    style CP fill:#38a169,color:#fff
+    style MV fill:#c53030,color:#fff
+```
+
+> [!NOTE]
+> The distinction between **Copy types** (stack-allocated primitives) and **Move types** (heap-allocated collections) is fundamental to understanding Rust's ownership model in Week 3. Primitives are cheap to copy; collections transfer ownership on assignment.
 
 ---
 
@@ -188,6 +231,10 @@ fn change(input: &mut String) {
 - You cannot mix mutable and immutable references with overlapping lifetimes.
 
 This prevents data races **at compile time** — a major security property.
+
+#### Lifetimes (Preview)
+
+While not formally covered until later in the course, Rust's **lifetime annotations** (`'a`) are the compile-time mechanism that enforces the borrowing rules above. When you write `fn foo(s: &String)`, the compiler infers the lifetime of that reference. In more complex scenarios (e.g., returning a reference from a function that takes two references), you must explicitly annotate lifetimes: `fn longest<'a>(x: &'a str, y: &'a str) -> &'a str`. This ensures no reference outlives the data it points to — eliminating dangling pointer bugs at compile time.
 
 #### Ownership & Borrowing Visual Model
 
@@ -320,6 +367,32 @@ Implemented live in class using all of the concepts above:
 
 Full source: see [scripts/hangman_v1/](scripts/hangman_v1/) and [scripts/hangman_refined/](scripts/hangman_refined/).
 
+### Struct → Impl → Enum Relationship
+
+```mermaid
+graph TD
+    S["struct Hangman<br/>word: Vec&lt;char&gt;<br/>guessed: HashSet&lt;char&gt;<br/>attempts_left: u8"] --> I["impl Hangman"]
+    I --> NW["::new(&[&str], u8) → Self<br/>Associated function (constructor)"]
+    I --> ST["state(&self) → GameState<br/>Immutable borrow"]
+    I --> DW["display_word(&self)<br/>Immutable borrow"]
+    I --> MG["make_guess(&mut self, char)<br/>Mutable borrow"]
+
+    ST --> E["enum GameState"]
+    E --> EP["Playing"]
+    E --> EW["Won 🎉"]
+    E --> EL["Lost 💀"]
+
+    EW --> MA["match game.state()"]
+    EL --> MA
+    EP --> MA
+    MA --> L["Game loop continues<br/>or breaks"]
+
+    style S fill:#2b6cb0,color:#fff
+    style E fill:#d69e2e,color:#fff
+    style EW fill:#38a169,color:#fff
+    style EL fill:#c53030,color:#fff
+```
+
 ### Cryptography Pivot (intro)
 
 The instructor signaled that structs would be applied to basic cryptographic primitives in subsequent weeks (e.g., state structs for cipher algorithms).
@@ -342,6 +415,21 @@ Students received pre-written Rust code containing deliberate bugs and were aske
 
 Students walked through the official Rust Book tutorial:
 <https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html>
+
+### Guessing Game Flow
+
+```mermaid
+stateDiagram-v2
+    [*] --> GenerateSecret: rand::rng().random_range(1..=100)
+    GenerateSecret --> WaitForInput: Print prompt
+    WaitForInput --> ParseInput: read_line(&mut guess)
+    ParseInput --> WaitForInput: Err — "Please type a number!"
+    ParseInput --> CompareGuess: Ok(num)
+    CompareGuess --> WaitForInput: Less — "Too small!"
+    CompareGuess --> WaitForInput: Greater — "Too big!"
+    CompareGuess --> YouWin: Equal — "You win! 🎉"
+    YouWin --> [*]
+```
 
 Concepts reinforced:
 

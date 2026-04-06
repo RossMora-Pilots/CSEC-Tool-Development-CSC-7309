@@ -11,11 +11,11 @@ This index maps portfolio artifacts (code, summaries, transcripts, assignments) 
 
 | Artifact | Path | Week | Concepts |
 |---|---|---|---|
-| Hangman v1 — source | [scripts/hangman_v1/src/main.rs](scripts/hangman_v1/src/main.rs) | 4 | struct, impl, Vec, rand |
+| Hangman v1 — source (+ 8 unit tests) | [scripts/hangman_v1/src/main.rs](scripts/hangman_v1/src/main.rs) | 4 | struct, impl, Vec, rand |
 | Hangman v1 — manifest | [scripts/hangman_v1/Cargo.toml](scripts/hangman_v1/Cargo.toml) | 4 | Cargo metadata |
 | Hangman refined — source (+ 9 unit tests) | [scripts/hangman_refined/src/main.rs](scripts/hangman_refined/src/main.rs) | 4 | enum, HashSet, match, saturating_sub, #[cfg(test)] |
 | Hangman refined — manifest | [scripts/hangman_refined/Cargo.toml](scripts/hangman_refined/Cargo.toml) | 4 | Cargo metadata |
-| Guessing Game — source | [scripts/guessing_game/src/main.rs](scripts/guessing_game/src/main.rs) | 5 | stdin, Result, Ordering, loop, parse |
+| Guessing Game — source (+ 7 unit tests) | [scripts/guessing_game/src/main.rs](scripts/guessing_game/src/main.rs) | 5 | stdin, Result, Ordering, loop, parse |
 | Guessing Game — manifest | [scripts/guessing_game/Cargo.toml](scripts/guessing_game/Cargo.toml) | 5 | Cargo metadata |
 | Scripts inventory | [SCRIPTS_README.md](SCRIPTS_README.md) | All | — |
 
@@ -53,6 +53,10 @@ This index maps portfolio artifacts (code, summaries, transcripts, assignments) 
 | Keylogger course context | [KEYLOGGER_STUDY_WEEK3.md](KEYLOGGER_STUDY_WEEK3.md#relationship-to-other-course-content) | `graph LR` |
 | Bug Hunt debug flow | [Assignment01_BugHunt.md](assignments/Assignment01_BugHunt.md#debugging-process-applied) | `graph TD` |
 | Lab dependency chain | [Labs_1-3_Summary.md](assignments/Labs_1-3_Summary.md#relationship-to-portfolio-artifacts) | `graph TD` |
+| Toolchain setup flow | [WEEKS_1-6 Summary](WEEKS_1-6_RUST_FUNDAMENTALS_SUMMARY.md#week-1) | `graph LR` |
+| Type system hierarchy | [WEEKS_1-6 Summary](WEEKS_1-6_RUST_FUNDAMENTALS_SUMMARY.md#week-2) | `graph TD` |
+| Struct → impl → enum | [WEEKS_1-6 Summary](WEEKS_1-6_RUST_FUNDAMENTALS_SUMMARY.md#week-4) | `graph LR` |
+| Guessing game state machine | [WEEKS_1-6 Summary](WEEKS_1-6_RUST_FUNDAMENTALS_SUMMARY.md#week-5) | `stateDiagram-v2` |
 
 ## Original Course Artifacts (at D:\CC, not in this repo)
 
@@ -78,11 +82,26 @@ This index maps portfolio artifacts (code, summaries, transcripts, assignments) 
 ## Screenshots & Compilation Evidence
 
 > [!NOTE]
-> Rust toolchain (1.94.1, stable-x86_64-pc-windows-gnu) is installed and all 3 Cargo projects pass `cargo check`. The `hangman_refined` project passes 9/9 unit tests. The `rust-check.yml` CI workflow provides automated, repeatable compilation verification on every push.
+> While the `screenshots/` directory does not contain image files (this portfolio uses text-based evidence), **execution evidence is embedded directly in the documents** as terminal output transcripts — a more verifiable and diff-friendly format than screenshots.
+
+### Embedded Execution Evidence
+
+| Evidence Type | Location | Description |
+|---|---|---|
+| Hangman v1 game session | [SCRIPTS_README.md](SCRIPTS_README.md#demo-output--execution-evidence) | Full terminal session: word selection → guesses → win/loss |
+| Hangman refined game session | [SCRIPTS_README.md](SCRIPTS_README.md#demo-output--execution-evidence) | Interactive play with improved UI feedback |
+| Guessing game session | [SCRIPTS_README.md](SCRIPTS_README.md#demo-output--execution-evidence) | Number guessing with attempt counter |
+| Full test suite output | [SCRIPTS_README.md](SCRIPTS_README.md#demo-output--execution-evidence) | `cargo test` results: 24/24 tests passing |
+| Assignment 2 demo | [Assignment02_GuessingGame.md](assignments/Assignment02_GuessingGame.md#demo-output) | Guessing game with attempt tracking |
+| Midterm demo | [MIDTERM_PROJECT_SUMMARY.md](MIDTERM_PROJECT_SUMMARY.md#demo-session) | Hangman refined interactive play |
+
+### Automated Verification
 
 | Evidence | Description | Status |
 |---|---|---|
 | `cargo check` (3 projects) | All projects compile cleanly | ✅ Verified locally |
 | `cargo test` (hangman_refined) | 9/9 unit tests pass | ✅ Verified locally |
+| `cargo test` (hangman_v1) | 8/8 unit tests pass | ✅ Added in remediation cycle 2 |
+| `cargo test` (guessing_game) | 7/7 unit tests pass | ✅ Added in remediation cycle 2 |
 | `rust-check.yml` CI workflow | Automated compilation + test on push | ✅ Workflow configured |
-| Mermaid diagrams | Visual evidence of architecture & flow | ✅ 12 diagrams in portfolio |
+| Mermaid diagrams | Visual evidence of architecture & flow | ✅ 16 diagrams in portfolio |

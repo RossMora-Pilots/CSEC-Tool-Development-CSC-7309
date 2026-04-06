@@ -1,11 +1,21 @@
 # CSEC Tool Development — Portfolio (CSC-7309, Winter 2025)
 
+**Student Portfolio by Ross Moravec** | Instructor: Travis Czech | Cambrian College
+
 [![CI](https://github.com/RossMora/407-tool-development/actions/workflows/ci.yml/badge.svg)](https://github.com/RossMora/407-tool-development/actions/workflows/ci.yml)
 [![Portfolio CI](https://github.com/RossMora/407-tool-development/actions/workflows/portfolio-ci.yml/badge.svg)](https://github.com/RossMora/407-tool-development/actions/workflows/portfolio-ci.yml)
 [![Markdown Lint](https://github.com/RossMora/407-tool-development/actions/workflows/markdownlint.yml/badge.svg)](https://github.com/RossMora/407-tool-development/actions/workflows/markdownlint.yml)
 [![Gitleaks](https://github.com/RossMora/407-tool-development/actions/workflows/gitleaks.yml/badge.svg)](https://github.com/RossMora/407-tool-development/actions/workflows/gitleaks.yml)
 
 > **Public portfolio** documenting learning outcomes, Rust code artifacts, and weekly synthesis from **CSEC Tool Development (CSC-7309)** — a Winter 2025 course in the Postgraduate Cybersecurity Certificate at **Cambrian College** (Sudbury, Ontario), taught by **Instructor Travis Czech**.
+
+---
+
+## Why This Portfolio?
+
+This portfolio documents 6 weeks of intensive Rust fundamentals and security-tool development in a postgraduate setting, emphasizing **memory-safe systems programming** and a **defensive security mindset**. It demonstrates the ability to learn a systems language from scratch, write clean idiomatic code, and think critically about tool architecture — skills that transfer directly to security engineering roles.
+
+📊 **At a Glance:** 3 Cargo projects · ~423 lines of Rust · 9 unit tests · 20+ Mermaid diagrams · 1 security case study (keylogger analysis) · Full CI/CD pipeline
 
 ---
 
@@ -149,3 +159,11 @@ mindmap
 ## License & Usage
 
 Educational portfolio — original lecture content remains © Travis Czech / Cambrian College. Student-authored notes, summaries, and code adaptations in this repository are shared for learning and evaluation purposes. See repository settings and attribution in each file for specifics.
+
+---
+
+## Contact
+
+**Ross Moravec** — [GitHub Profile](https://github.com/RossMora)
+
+Questions about this portfolio? [Open an issue](https://github.com/RossMora/407-tool-development/issues) or reach out via GitHub.

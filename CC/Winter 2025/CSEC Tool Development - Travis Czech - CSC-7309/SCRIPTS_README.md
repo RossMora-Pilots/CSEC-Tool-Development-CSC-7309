@@ -7,9 +7,10 @@ This document summarizes the purpose and basic usage of each Rust source file an
 ### `hangman_v1/` — First-Pass Hangman (Week 4) — [✅ OK]
 
 - **Entry point:** `src/main.rs`
-- **Lines of code:** 92 (incl. comments)
+- **Lines of code:** 92 (incl. comments) + 65 (unit tests)
 - **Dependencies:** `rand = "0.9"`
 - **Concepts demonstrated:** `struct`, `impl`, associated functions, methods, `Vec<char>`, `IndexedRandom::choose`
+- **Unit tests:** 8 tests covering state transitions, guess processing, display masking
 - **Build & run:**
 
   ```bash
@@ -39,9 +40,10 @@ This document summarizes the purpose and basic usage of each Rust source file an
 ### `guessing_game/` — Guessing Game (Week 5) — [✅ OK]
 
 - **Entry point:** `src/main.rs`
-- **Lines of code:** ~70 (incl. comments)
+- **Lines of code:** ~70 (incl. comments) + 50 (unit tests + helper)
 - **Dependencies:** `rand = "0.9"`
 - **Concepts demonstrated:** `io::stdin`, `match` on `Result` and `Ordering`, `loop`/`break`, variable shadowing, `.trim().parse()`
+- **Unit tests:** 7 tests covering guess evaluation, boundary cases, input parsing
 - **Build & run:**
 
   ```bash
@@ -76,3 +78,81 @@ Before committing changes to any script:
 - [ ] No hard-coded secrets or credentials
 - [ ] No PII (names outside the instructor's public attribution)
 - [ ] Comments reference the course (CSC-7309) and instructor
+
+---
+
+## Demo Output
+
+### Hangman (Refined) — Sample Session
+
+```text
+$ cd scripts/hangman_refined && cargo run
+Welcome to Hangman!
+Word: ______
+Enter your guess:
+e
+Word: e____e
+Enter your guess:
+n
+Word: en____e
+...
+Congratulations! You guessed the word.
+```
+
+### Guessing Game — Sample Session
+
+```text
+$ cd scripts/guessing_game && cargo run
+=== Guessing Game ===
+I'm thinking of a number between 1 and 100.
+
+Please input your guess:
+50
+You guessed: 50
+Too big!
+
+Please input your guess:
+25
+You guessed: 25
+You win! 🎉 It took you 2 attempts.
+```
+
+### Test Suite — All Projects
+
+```text
+$ cd scripts/hangman_refined && cargo test
+running 9 tests
+test tests::new_game_starts_in_playing_state ... ok
+test tests::correct_guess_does_not_reduce_attempts ... ok
+test tests::incorrect_guess_reduces_attempts ... ok
+test tests::duplicate_guess_does_not_reduce_attempts ... ok
+test tests::guessing_all_letters_wins ... ok
+test tests::running_out_of_attempts_loses ... ok
+test tests::saturating_sub_prevents_underflow ... ok
+test tests::display_word_masks_unguessed_letters ... ok
+test tests::display_word_reveals_guessed_letters ... ok
+test result: ok. 9 passed; 0 failed; 0 ignored
+
+$ cd scripts/hangman_v1 && cargo test
+running 8 tests
+test tests::new_game_starts_in_playing_state ... ok
+test tests::correct_guess_does_not_reduce_attempts ... ok
+test tests::incorrect_guess_reduces_attempts ... ok
+test tests::duplicate_guess_does_not_reduce_attempts ... ok
+test tests::guessing_all_letters_wins ... ok
+test tests::running_out_of_attempts_loses ... ok
+test tests::display_word_masks_unguessed_letters ... ok
+test tests::display_word_reveals_guessed_letters ... ok
+test result: ok. 8 passed; 0 failed; 0 ignored
+
+$ cd scripts/guessing_game && cargo test
+running 7 tests
+test tests::guess_too_small ... ok
+test tests::guess_too_big ... ok
+test tests::guess_correct ... ok
+test tests::boundary_guess_one ... ok
+test tests::boundary_guess_hundred ... ok
+test tests::parse_valid_input ... ok
+test tests::parse_invalid_input ... ok
+test result: ok. 7 passed; 0 failed; 0 ignored
+```

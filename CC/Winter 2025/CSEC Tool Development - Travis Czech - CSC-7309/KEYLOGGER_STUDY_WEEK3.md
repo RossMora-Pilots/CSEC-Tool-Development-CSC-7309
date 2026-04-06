@@ -159,6 +159,18 @@ A security analyst reviewing a system for keylogger presence would look for:
 
 This comparison illustrates **why Rust is increasingly chosen for security tooling** — the same tool written in C would have multiple classes of vulnerabilities that Rust prevents at compile time.
 
+### CWE Vulnerability Classes Mitigated
+
+The Rust-specific security properties above directly map to documented vulnerability classes:
+
+| CWE ID | Vulnerability | Rust Mitigation | Relevance to Keylogger |
+|---|---|---|---|
+| [CWE-119](https://cwe.mitre.org/data/definitions/119.html) | Buffer Overflow | Bounds-checked access | Event buffer reading is safe |
+| [CWE-416](https://cwe.mitre.org/data/definitions/416.html) | Use After Free | Ownership prevents dangling pointers | `Arc<AtomicBool>` shared ownership is compile-time verified |
+| [CWE-362](https://cwe.mitre.org/data/definitions/362.html) | Race Condition | `Send`/`Sync` + `&mut T` exclusivity | Signal handler and logging loop share state safely |
+| [CWE-476](https://cwe.mitre.org/data/definitions/476.html) | Null Pointer Dereference | `Option<T>` replaces null | `find_keyboard()` returns `Option<Device>`, not null |
+| [CWE-401](https://cwe.mitre.org/data/definitions/401.html) | Memory Leak | RAII drop semantics | File handles and device handles are auto-closed |
+
 ## Relationship to Other Course Content
 
 ```mermaid

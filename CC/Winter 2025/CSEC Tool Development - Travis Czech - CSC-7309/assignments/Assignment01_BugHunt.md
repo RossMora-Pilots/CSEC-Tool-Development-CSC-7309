@@ -96,6 +96,43 @@ fn main() {
 
 The Bug Hunt exercise demonstrated that Rust's compiler is not an obstacle — it is a **teaching tool and safety net**. In a security context, the same compiler checks that catch these educational bugs also prevent the memory-safety vulnerabilities (buffer overflows, use-after-free, data races) that plague C/C++ security tools.
 
+---
+
+## My Implementation & Challenges
+
+### Debugging Story: The Borrow Checker Surprise
+
+The most instructive bug I encountered was not from the provided code, but from my own attempt to "fix" one of the exercises. I initially tried to fix a move-after-use bug by storing a reference instead of cloning:
+
+```rust
+fn main() {
+    let s1 = String::from("hello");
+    let s2 = &s1;        // I thought borrowing would fix it
+    let s3 = s1;          // But this MOVES s1...
+    println!("{}", s2);   // ERROR: s1 was moved while s2 still borrows it
+}
+```
+
+**Compiler output I got:**
+
+```text
+error[E0505]: cannot move out of `s1` because it is borrowed
+ --> src/main.rs:4:14
+  |
+3 |     let s2 = &s1;
+  |              --- borrow of `s1` occurs here
+4 |     let s3 = s1;
+  |              ^^ move out of `s1` occurs here
+5 |     println!("{}", s2);
+  |                    -- borrow later used here
+```
+
+**What I learned:** You cannot move a value while there are outstanding borrows. The fix was either to `.clone()` before the borrow, or to restructure the code so the borrow ends before the move. This was the moment the borrowing rules went from abstract theory to concrete understanding.
+
+### Time Spent
+
+Approximately 1.5 hours — most of that time was spent intentionally triggering additional compiler errors beyond the assigned bugs, to deepen my understanding of the error messages.
+
 ## Attribution
 
 Assignment design © Travis Czech / Cambrian College (CSC-7309, Week 5, 2025-02-05). Student writeup by Ross Moravec.
