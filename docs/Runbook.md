@@ -46,17 +46,24 @@ scripts/pm.sh all       # run everything + auto-commit
 ## Validating Rust Code Locally
 
 ```bash
-# Run all 24 tests across the workspace (preferred)
+# Run all 24 unit tests + 5 integration tests across the workspace (preferred)
 cd "CC/Winter 2025/CSEC Tool Development - Travis Czech - CSC-7309/scripts"
 cargo test --workspace
 
 # Or run individual projects
-cd hangman_v1 && cargo test     # 8 tests
-cd ../hangman_refined && cargo test  # 9 tests
-cd ../guessing_game && cargo test    # 7 tests
+cd hangman_v1 && cargo test     # 8 unit tests
+cd ../hangman_refined && cargo test  # 9 unit + 3 integration tests
+cd ../guessing_game && cargo test    # 7 unit + 2 integration tests
+
+# Check formatting
+cargo fmt --check --all
+
+# Audit dependencies for known vulnerabilities
+cargo install cargo-audit
+cargo audit
 ```
 
-> **Note:** If `dlltool.exe` or `link.exe` is not found, install MinGW-w64 (for GNU target) or Visual Studio Build Tools (for MSVC target). Alternatively, rely on the `rust-check.yml` CI workflow for automated verification.
+> **Note:** If `dlltool.exe` or `link.exe` is not found, install MinGW-w64 (for GNU target) or Visual Studio Build Tools (for MSVC target). Alternatively, rely on the `rust-check.yml` CI workflow for automated verification. See [SCRIPTS_README troubleshooting](../CC/Winter%202025/CSEC%20Tool%20Development%20-%20Travis%20Czech%20-%20CSC-7309/SCRIPTS_README.md) for common issues.
 
 ## Pre-Push Checks
 
