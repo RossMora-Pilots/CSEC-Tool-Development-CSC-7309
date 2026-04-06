@@ -9,6 +9,30 @@
 
 ## What Was Covered (Weeks 1–6)
 
+### Learning Timeline
+
+```mermaid
+gantt
+    title Phase 1 Learning Progression (Weeks 1–6)
+    dateFormat  YYYY-MM-DD
+    axisFormat  %b %d
+    section Environment
+        Rustup + Cargo Setup           :done, w1, 2025-01-08, 7d
+    section Fundamentals
+        Variables, Types, Mutability   :done, w2, 2025-01-15, 7d
+    section Memory Safety
+        Ownership, Borrowing, Refs     :done, w3, 2025-01-22, 7d
+        Keylogger Study (in-class)     :crit, done, kl, 2025-01-22, 1d
+    section Data Modeling
+        Structs, Enums, Methods        :done, w4, 2025-01-29, 7d
+        Hangman v1 (live-coded)        :done, hv1, 2025-01-29, 3d
+        Hangman Refined (refactor)     :done, hr, 2025-02-01, 4d
+    section Applied Practice
+        Bug Hunt + Guessing Game       :done, w5, 2025-02-05, 7d
+    section Consolidation
+        Midterm Review + Labs          :done, w6, 2025-02-12, 7d
+```
+
 By the midterm, the course had built the full Rust foundation needed to author custom security tools:
 
 - Environment mastery (Rustup, Cargo, VS Code)
@@ -30,6 +54,24 @@ From the Week 1 and Week 2 lectures, the instructor previewed the trajectory:
 | **Cryptographic tools** (preview, Week 4) | byte arrays, trait objects, `crypto` crates | Post-midterm |
 
 ## Methodology Observed
+
+### Instructor Methodology Flow
+
+```mermaid
+graph LR
+    P1["🔨 Build Your Own<br/>Custom > Off-the-Shelf"] --> P2["🖥️ Use VMs<br/>Isolate Security Work"]
+    P2 --> P3["💻 Live-Code<br/>Don't Read Slides"]
+    P3 --> P4["🔄 Refactor After<br/>It Works"]
+    P4 --> P5["🤝 Respect the<br/>Compiler"]
+    P5 -.-> OUT["Security Tool<br/>That Works"]
+
+    style P1 fill:#2d3748,color:#fff
+    style P2 fill:#2b6cb0,color:#fff
+    style P3 fill:#38a169,color:#fff
+    style P4 fill:#d69e2e,color:#fff
+    style P5 fill:#c53030,color:#fff
+    style OUT fill:#2d3748,color:#fff,stroke-dasharray: 5 5
+```
 
 Throughout the course the instructor reinforced a consistent methodology for security tool development:
 
@@ -113,7 +155,7 @@ graph LR
 
 | Skill Area | Level | Proficiency | Evidence |
 |---|---|---|---|
-| **Rust syntax** | Proficient | 100% | Hangman refined + Guessing Game + 9 unit tests |
+| **Rust syntax** | Proficient | 100% | Hangman refined + Guessing Game + 24 unit tests |
 | **Memory safety reasoning** | Intermediate | 80% | Ownership/borrowing labs + keylogger study |
 | **Cargo workflow** | Proficient | 100% | 3 multi-crate projects with build automation |
 | **Pattern matching** | Intermediate | 80% | `match` on enum, Result, Ordering |
@@ -123,6 +165,17 @@ graph LR
 | **Error handling** | Beginner+ | 60% | `.expect()`, `match Result`, `?` operator |
 | **Security-tool architecture** | Conceptual | 40% | Keylogger study + scanner previews |
 
+### Skill Acquisition Distribution
+
+```mermaid
+%%{init: {'theme': 'base'}}%%
+pie title Proficiency Distribution Across 9 Skill Areas
+    "Proficient (100%)" : 2
+    "Intermediate (80%)" : 2
+    "Beginner+ (60%)" : 4
+    "Conceptual (40%)" : 1
+```
+
 ## Reflection
 
 The first half of CSEC Tool Development succeeds because it treats Rust not as a language to memorize, but as a **design philosophy**. Ownership is the lens; every subsequent concept (borrowing, lifetimes, traits, concurrency) sits on that foundation.
@@ -130,6 +183,28 @@ The first half of CSEC Tool Development succeeds because it treats Rust not as a
 Whether the course continued into network scanners, crypto tools, or malware analysis, the Week 1–6 foundation was designed to make those topics *tractable* rather than magical.
 
 **Personal takeaway:** I now read Rust compiler errors as helpful feedback rather than gatekeeping. The v1 → refined Hangman exercise was the moment that clicked. Given a real security-tool problem today, I would reach for Rust without hesitation for anything that touches memory, threads, or a network socket.
+
+### What Was Genuinely Hard
+
+Not everything came naturally. Some honest struggles from Phase 1:
+
+1. **The borrow checker felt adversarial in Week 3.** I spent 45 minutes on a single ownership error where I tried to store a reference (`&String`) and then move the original value. The compiler error (`E0505: cannot move out of value because it is borrowed`) was clear, but understanding *why* Rust forbids this required re-reading the three ownership rules multiple times. It was only after drawing out the stack/heap memory layout on paper that the "aha" moment arrived.
+
+2. **`String` vs. `&str` confusion persisted for days.** In Lab 1, I tried `let name: &str = String::from("Ross")` and got a type mismatch. Coming from Python where strings are just strings, the distinction between owned heap-allocated `String` and borrowed slice `&str` felt like unnecessary complexity — until the keylogger study showed why ownership of string data matters for security tools that handle sensitive input.
+
+3. **Variable shadowing felt wrong.** In the Guessing Game (Assignment 2), reusing `let guess` for both the `String` input and the parsed `u32` felt like it should be a redeclaration error. I had to actively unlearn assumptions from C and Python where this would be a bug, not a feature. I still instinctively reach for `guess_str` / `guess_num` naming.
+
+4. **Lifetimes remain partially opaque.** Week 3 previewed lifetime annotations but we didn't write any in Phase 1. I understand conceptually that `'a` connects input and output reference scopes, but I haven't yet faced a compiler error that forced me to add lifetime annotations. This is my biggest gap going into Phase 2.
+
+5. **Test-writing discipline was initially weak.** For Hangman v1, I wrote zero tests and considered the project "done" when it ran. The instructor's refactoring exercise forced me to add tests, and the process of writing `game_with_word()` test helpers taught me that testable code requires different architecture than "just make it work" code. The v1 → refined jump was partly about making the code testable, not just idiomatic.
+
+### What I Would Do Differently
+
+If I were starting Phase 1 again:
+
+- **Write tests first** for every function before implementing — the refined Hangman tests caught edge cases I would have missed.
+- **Draw memory diagrams** earlier — I should have been sketching stack/heap layouts from Week 2, not Week 3.
+- **Embrace compiler errors immediately** rather than trying to suppress them with `.clone()` everywhere. Several of my early "fixes" were `.clone()` calls that hid real design problems.
 
 ## Time Investment & Effort
 

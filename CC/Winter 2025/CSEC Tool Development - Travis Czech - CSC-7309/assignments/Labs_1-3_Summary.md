@@ -214,3 +214,28 @@ Square? false
 ## Attribution
 
 Lab design and exercises © Travis Czech / Cambrian College (CSC-7309, Winter 2025). Student summaries by Ross Moravec.
+
+## Competencies Achieved
+
+### Lab 1 — Environment & Variables
+
+- [x] Install and verify Rust toolchain (rustup, cargo, rustc)
+- [x] Create and run a Cargo project from scratch
+- [x] Declare variables with explicit type annotations
+- [x] Understand mutability (`let` vs `let mut`)
+- [x] Distinguish between `String` and `&str`
+
+### Lab 2 — Ownership & Borrowing
+
+- [x] Demonstrate the three ownership rules in code
+- [x] Trigger and resolve ownership errors (`E0382`, `E0505`)
+- [x] Use immutable references (`&T`) and mutable references (`&mut T`)
+- [x] Understand move semantics vs. `.clone()`
+- [x] Apply the "one mutable OR many immutable" borrowing rule
+
+### Lab 3 — Structs & Methods
+
+- [x] Define custom types with `struct`
+- [x] Implement methods and associated functions via `impl` blocks
+- [x] Use `&self` for immutable method access
+- [x] Connect struct patterns to the Hangman game architecture

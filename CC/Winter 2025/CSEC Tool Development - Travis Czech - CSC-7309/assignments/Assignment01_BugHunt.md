@@ -136,3 +136,12 @@ Approximately 1.5 hours — most of that time was spent intentionally triggering
 ## Attribution
 
 Assignment design © Travis Czech / Cambrian College (CSC-7309, Week 5, 2025-02-05). Student writeup by Ross Moravec.
+
+## Competencies Achieved
+
+- [x] Read and interpret Rust compiler error messages (`E0382`, `E0505`, `E0308`)
+- [x] Identify ownership violations (move after use, borrow while moved)
+- [x] Apply fixes: `.clone()`, pass by reference (`&`), add `mut`
+- [x] Distinguish between immutable and mutable borrows
+- [x] Use the iterative `compile → read error → fix → compile` debugging workflow
+- [x] Understand how compiler-guided debugging prevents security vulnerabilities

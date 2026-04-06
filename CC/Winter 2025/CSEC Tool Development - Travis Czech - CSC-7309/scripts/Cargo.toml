@@ -5,3 +5,7 @@ members = [
     "hangman_refined",
     "guessing_game",
 ]
+
+[workspace.package]
+rust-version = "1.75.0"
+edition = "2021"

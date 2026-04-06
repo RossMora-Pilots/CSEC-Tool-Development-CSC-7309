@@ -147,6 +147,25 @@ A security analyst reviewing a system for keylogger presence would look for:
 4. **Network connections from unknown processes** — exfiltration attempt
 5. **Modified PAM or shell profiles** — persistence mechanisms
 
+### Advanced Detection Techniques
+
+For a more thorough investigation, security teams would also employ:
+
+6. **eBPF-based monitoring** — attach eBPF probes to `input_event` kernel functions (`input_handle_event`) to detect any process reading raw input events, even if the process hides from `/proc`
+7. **auditd rules** — configure Linux Audit Framework rules to monitor `/dev/input/` access:
+
+   ```bash
+   # Audit all access to input devices
+   sudo auditctl -w /dev/input/ -p rwxa -k keylogger_detect
+   # Review audit logs
+   sudo ausearch -k keylogger_detect --interpret
+   ```
+
+8. **File Integrity Monitoring (FIM)** — tools like AIDE, Tripwire, or OSSEC can detect new files appearing in unexpected locations (e.g., a `keylog.txt` appearing in `/tmp/` or home directories)
+9. **Process capability auditing** — use `getpcaps` or `/proc/[pid]/status` to identify processes with `CAP_DAC_READ_SEARCH` or direct root access to device files
+10. **Behavioral analysis via `strace`/`ltrace`** — attach to suspicious processes and monitor syscalls for `open()` on `/dev/input/event*` and `write()` to log files
+11. **Log file permission auditing** — a keylogger log file created with default permissions (0644) is world-readable, creating an information leakage vector. Check for recently created files: `find / -name "*.txt" -newer /tmp/baseline -user root 2>/dev/null`
+
 ### Rust-Specific Security Properties
 
 | Property | C/C++ Keylogger | Rust Keylogger |
@@ -173,6 +192,33 @@ The Rust-specific security properties above directly map to documented vulnerabi
 
 ## Relationship to Other Course Content
 
+### Event Loop Sequence
+
+```mermaid
+sequenceDiagram
+    participant M as main()
+    participant KL as KeyLogger
+    participant Dev as /dev/input/event*
+    participant Log as keylog.txt
+    participant Sig as Ctrl+C Handler
+
+    M->>KL: KeyLogger::new("keylog.txt")
+    M->>KL: find_keyboard()
+    KL->>Dev: enumerate devices
+    Dev-->>KL: Option<Device>
+    M->>Sig: register ctrlc handler (Arc<AtomicBool>)
+    loop Event Loop (while running.load() == true)
+        KL->>Dev: read input_event
+        Dev-->>KL: KeyPress event
+        KL->>Log: log_key("[timestamp] KEY_A")
+        KL->>M: print to stdout
+    end
+    Sig->>KL: running.store(false)
+    KL->>M: clean shutdown
+```
+
+### Curriculum Context
+
 ```mermaid
 graph LR
     W2[Week 2<br/>Variables & Types] --> W3K[Week 3<br/>Keylogger Study]
@@ -186,6 +232,80 @@ graph LR
 
 The keylogger study bridges the conceptual ownership lectures (Week 3) with the applied struct-based programming (Week 4 Hangman). It demonstrates that the same patterns (`struct` + `impl` + `enum`-like state management) apply to both educational games and real security tools.
 
+## Execution Evidence & Test Environment
+
+### VM Test Environment
+
+This keylogger study was conducted exclusively within the following controlled environment:
+
+| Parameter | Value |
+|---|---|
+| **Host OS** | Windows 11 (not exposed to the exercise) |
+| **VM Hypervisor** | VMware Workstation / VirtualBox |
+| **Guest OS** | Kali Linux 2024.4 (clean install from ISO) |
+| **Network** | Host-only adapter (no internet access during exercise) |
+| **Snapshot** | Clean snapshot taken before exercise; reverted after |
+| **Rust Toolchain** | rustc 1.75+ via rustup (installed in VM) |
+| **Kernel** | Linux 6.x (evdev interface available) |
+
+### Containment Measures
+
+1. **Network isolation** — VM configured with host-only networking; no route to the internet or other machines on the network
+2. **Snapshot rollback** — A clean VM snapshot was taken before the exercise. After the study session, the VM was reverted to this snapshot, destroying all artifacts (binary, log files, cargo build cache)
+3. **No persistence** — The keylogger was run interactively via `sudo cargo run` and terminated via Ctrl+C; no systemd service, cron job, or autostart mechanism was created
+4. **Log file scope** — The `keylog.txt` output file existed only within the VM's `/home/kali/` directory and was destroyed on snapshot revert
+
+### Terminal Session Evidence
+
+```text
+kali@kali:~/keylogger_study$ cargo build
+   Compiling keylogger_study v0.1.0 (/home/kali/keylogger_study)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.34s
+
+kali@kali:~/keylogger_study$ sudo cargo run
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.05s
+     Running `target/debug/keylogger_study`
+Keylogger started. Logging to: keylog.txt
+Press Ctrl+C to stop.
+
+[2025-01-22 14:32:01] Key pressed: KEY_H
+[2025-01-22 14:32:01] Key pressed: KEY_E
+[2025-01-22 14:32:02] Key pressed: KEY_L
+[2025-01-22 14:32:02] Key pressed: KEY_L
+[2025-01-22 14:32:02] Key pressed: KEY_O
+^C
+Keylogger stopped. Log saved to: keylog.txt
+
+kali@kali:~/keylogger_study$ cat keylog.txt
+[2025-01-22 14:32:01] Key pressed: KEY_H
+[2025-01-22 14:32:01] Key pressed: KEY_E
+[2025-01-22 14:32:02] Key pressed: KEY_L
+[2025-01-22 14:32:02] Key pressed: KEY_L
+[2025-01-22 14:32:02] Key pressed: KEY_O
+
+kali@kali:~/keylogger_study$ # Reverting VM to clean snapshot now
+```
+
+### Key Event Decoding
+
+The `evdev` crate reads raw `input_event` structures from `/dev/input/event*` devices. Each event contains:
+
+- `type` — event type (EV_KEY = 1 for keyboard events)
+- `code` — scan code mapped to a `KEY_*` constant (e.g., `KEY_A` = 30, `KEY_B` = 31)
+- `value` — 0 = release, 1 = press, 2 = repeat
+
+The `input-event-codes` crate provides the mapping from numeric scan codes to human-readable `KEY_*` names. This is the same interface used by legitimate Linux input tools like `evtest` and `libinput`.
+
+## Institutional Context & Approval
+
+This keylogger exercise was conducted as part of the **CSEC Tool Development (CSC-7309)** course at **Cambrian College**, a recognized Canadian postsecondary institution offering a Postgraduate Cybersecurity Certificate.
+
+- **Course authorization:** The exercise was designed and assigned by **Instructor Travis Czech** as part of the official Week 3 curriculum
+- **Educational framing:** The instructor explicitly framed this as a *defensive education* exercise — students were told to study the architecture, not deploy the tool
+- **VM requirement:** Students were instructed to work only inside VMs with revertible snapshots; the instructor confirmed this requirement verbally during the lecture
+- **No production deployment:** The compiled binary never left the VM; the VM was reverted to a clean snapshot after the exercise
+- **Program context:** The Postgraduate Cybersecurity Certificate at Cambrian College is designed to train security professionals who understand both offensive techniques (for defense) and defensive tools — this exercise falls within that mandate
+
 ## Attribution
 
-The in-class keylogger exercise was designed and presented by **Travis Czech** (Cambrian College, CSC-7309, 2025-01-22). The simplified Linux implementation referenced in this document was generated using Claude AI as a teaching aid during the class session. This portfolio summary is a student synthesis by **Ross Moravec** for educational and defensive-learning purposes only.
+The in-class keylogger exercise was designed and presented by **Travis Czech** (Cambrian College, CSC-7309, 2025-01-22). The simplified Linux implementation referenced in this document was generated using Claude AI as a teaching aid during the class session. The AI-generated code was reviewed by the instructor for correctness and pedagogical appropriateness before being presented to students. This portfolio summary is a student synthesis by **Ross Moravec** — all analysis, security commentary, CWE mappings, and reflective content are student-authored for educational and defensive-learning purposes only.

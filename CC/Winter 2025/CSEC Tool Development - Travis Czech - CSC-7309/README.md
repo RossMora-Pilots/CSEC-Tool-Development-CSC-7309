@@ -6,6 +6,20 @@
 
 > **Start Here:** course overview, learning outcomes, and navigation for the CSEC Tool Development (CSC-7309) public portfolio.
 
+## What Is CSC-7309?
+
+CSEC Tool Development teaches postgraduate cybersecurity students to **build custom security tools from scratch using Rust** — a systems programming language designed for memory safety, concurrency, and performance. Rather than relying on off-the-shelf tools, students learn to construct bespoke utilities (port scanners, vulnerability scanners, cryptographic tools) with a deep understanding of what each tool does at the systems level. The course emphasizes Rust's ownership model as a defense against the memory-safety vulnerabilities (buffer overflows, use-after-free, data races) that plague C/C++ security tooling.
+
+## Prerequisites
+
+| Prerequisite | Level | Notes |
+|---|---|---|
+| **Programming fundamentals** | Required | Variables, loops, functions, basic data structures (Python or similar) |
+| **Command-line proficiency** | Required | Terminal navigation, file operations, package managers |
+| **Version control (Git)** | Recommended | Basic commit/push/pull workflow |
+| **Linux familiarity** | Recommended | VM setup, package installation, file permissions |
+| **Prior Rust experience** | Not required | Course starts from zero |
+
 ## Course Snapshot
 
 | Attribute | Value |
@@ -28,7 +42,7 @@
 | [MIDTERM_PROJECT_SUMMARY.md](MIDTERM_PROJECT_SUMMARY.md) | Hangman game writeup with architecture diagrams + metrics |
 | [KEYLOGGER_STUDY_WEEK3.md](KEYLOGGER_STUDY_WEEK3.md) | 🔒 In-class keylogger security analysis (Week 3) |
 | [FINAL_PROJECT_TOOL_DEVELOPMENT.md](FINAL_PROJECT_TOOL_DEVELOPMENT.md) | Phase 1 methodology reflection + skills visualization |
-| [EVIDENCE_INDEX.md](EVIDENCE_INDEX.md) | Complete artifact index with 11 Mermaid diagrams |
+| [EVIDENCE_INDEX.md](EVIDENCE_INDEX.md) | Complete artifact index with Mermaid diagram catalog |
 | [SCRIPTS_README.md](SCRIPTS_README.md) | Rust source code inventory (3 Cargo projects) |
 | [assignments/](assignments/) | Assignment writeups (Bug Hunt, Guessing Game, Labs 1–3) |
 | [scripts/](scripts/) | Student-authored Rust source (Hangman v1 + refined + Guessing Game) |

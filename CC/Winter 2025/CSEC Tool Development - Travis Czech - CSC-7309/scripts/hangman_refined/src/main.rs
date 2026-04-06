@@ -23,9 +23,9 @@
 // - std::collections::HashSet for storing guessed letters and checking membership quickly
 // - rand::seq::SliceRandom for picking a random word from the list
 //
+use rand::seq::IndexedRandom;
 use std::collections::HashSet;
-use std::io;
-use rand::seq::IndexedRandom; // rand 0.9: SliceRandom was renamed to IndexedRandom
+use std::io; // rand 0.9: SliceRandom was renamed to IndexedRandom
 
 /// Default word list for the Hangman game.
 const WORD_LIST: [&str; 5] = ["rust", "hangman", "programming", "cipher", "encryption"];
@@ -210,7 +210,9 @@ mod tests {
     #[test]
     fn display_word_masks_unguessed_letters() {
         let game = game_with_word("rust", 6);
-        let display: String = game.word.iter()
+        let display: String = game
+            .word
+            .iter()
             .map(|&c| if game.guessed.contains(&c) { c } else { '_' })
             .collect();
         assert_eq!(display, "____");
@@ -221,7 +223,9 @@ mod tests {
         let mut game = game_with_word("rust", 6);
         game.make_guess('r');
         game.make_guess('t');
-        let display: String = game.word.iter()
+        let display: String = game
+            .word
+            .iter()
             .map(|&c| if game.guessed.contains(&c) { c } else { '_' })
             .collect();
         assert_eq!(display, "r__t");

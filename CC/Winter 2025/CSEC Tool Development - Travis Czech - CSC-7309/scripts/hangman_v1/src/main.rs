@@ -11,8 +11,8 @@
 // Build:  cargo build
 // Run:    cargo run
 
-use std::io;
 use rand::seq::IndexedRandom;
+use std::io;
 
 /// Default word list for the Hangman game.
 const WORD_LIST: [&str; 5] = ["rust", "hangman", "programming", "cipher", "encryption"];
@@ -61,13 +61,11 @@ impl Hangman {
 
     /// Prints the word with unguessed letters masked as underscores.
     fn display_word(&self) {
-        let display: String = self.word.iter().map(|&c| {
-            if self.guessed.contains(&c) {
-                c
-            } else {
-                '_'
-            }
-        }).collect();
+        let display: String = self
+            .word
+            .iter()
+            .map(|&c| if self.guessed.contains(&c) { c } else { '_' })
+            .collect();
         println!("Word: {}", display);
     }
 
@@ -95,7 +93,9 @@ fn main() {
         println!("Enter your guess: ");
 
         let mut input = String::new();
-        io::stdin().read_line(&mut input).expect("Failed to read input");
+        io::stdin()
+            .read_line(&mut input)
+            .expect("Failed to read input");
         let letter = input.trim().chars().next().unwrap_or(' ');
 
         if letter.is_alphabetic() {
@@ -108,7 +108,10 @@ fn main() {
     game.display_word();
     match game.check_state().as_str() {
         "won" => println!("Congratulations! You guessed the word."),
-        "lost" => println!("Game over! The word was: {:?}", game.word.iter().collect::<String>()),
+        "lost" => println!(
+            "Game over! The word was: {:?}",
+            game.word.iter().collect::<String>()
+        ),
         _ => {}
     }
 }
@@ -178,7 +181,9 @@ mod tests {
     #[test]
     fn display_word_masks_unguessed_letters() {
         let game = game_with_word("rust", 6);
-        let display: String = game.word.iter()
+        let display: String = game
+            .word
+            .iter()
             .map(|&c| if game.guessed.contains(&c) { c } else { '_' })
             .collect();
         assert_eq!(display, "____");
@@ -189,7 +194,9 @@ mod tests {
         let mut game = game_with_word("rust", 6);
         game.make_guess('r');
         game.make_guess('t');
-        let display: String = game.word.iter()
+        let display: String = game
+            .word
+            .iter()
             .map(|&c| if game.guessed.contains(&c) { c } else { '_' })
             .collect();
         assert_eq!(display, "r__t");

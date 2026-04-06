@@ -2,6 +2,22 @@
 
 This document summarizes the purpose and basic usage of each Rust source file and Cargo project in this course portfolio.
 
+## System Requirements
+
+| Requirement | Minimum | Recommended |
+|---|---|---|
+| **Rust Toolchain** | 1.75.0+ | Latest stable via `rustup update` |
+| **Cargo** | Bundled with Rust | — |
+| **OS** | Linux, macOS, Windows 10+ | Any with Rust support |
+| **Disk Space** | ~500 MB (toolchain + build cache) | — |
+| **Internet** | Required for initial `cargo build` (downloads `rand` crate) | — |
+
+```bash
+# Verify your installation
+rustc --version    # expect: rustc 1.75.0 or later
+cargo --version    # expect: cargo 1.75.0 or later
+```
+
 ## Student-Authored Cargo Projects (scripts/)
 
 ### `hangman_v1/` — First-Pass Hangman (Week 4) — [✅ OK]
@@ -155,4 +171,30 @@ test tests::boundary_guess_hundred ... ok
 test tests::parse_valid_input ... ok
 test tests::parse_invalid_input ... ok
 test result: ok. 7 passed; 0 failed; 0 ignored
+```
+
+---
+
+## Troubleshooting
+
+### Common Issues
+
+| Problem | Cause | Solution |
+|---|---|---|
+| `rustc: command not found` | Rust not installed | Install via `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs \| sh` (Unix) or download from [rustup.rs](https://rustup.rs/) (Windows) |
+| `cargo build` fails with network error | Cannot download `rand` crate | Check internet connection; run `cargo update` to refresh registry |
+| `error[E0658]: use of unstable feature` | Rust version too old | Run `rustup update stable` to get latest toolchain |
+| `Blocking waiting for file lock` | Another cargo process running | Wait for it to finish, or delete `~/.cargo/.package-cache` |
+| Tests fail with `random` assertion | Non-deterministic test? | All tests in this portfolio are deterministic (use `game_with_word()` helpers). File an issue if reproducible. |
+| `warning: unused function` | `evaluate_guess()` in guessing_game | This function is used only in tests via `#[cfg(test)]`; the warning is suppressed in test builds |
+
+### Build From Scratch
+
+```bash
+# Full clean rebuild of all projects
+cd scripts
+cargo clean
+cargo build --workspace
+cargo test --workspace
+# Expected: 24 tests passing (8 + 9 + 7), 0 failures
 ```

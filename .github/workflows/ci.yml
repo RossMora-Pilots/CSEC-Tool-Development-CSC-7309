@@ -18,5 +18,23 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
-      - name: Sanity
+      - name: Python sanity
         run: python -V && echo "CI baseline is healthy"
+      - name: Validate JSON configs
+        run: python -c "import json, glob; [json.load(open(f)) for f in glob.glob('**/*.json', recursive=True)]"
+      - name: Check markdown file count
+        run: |
+          count=$(find . -name '*.md' -not -path './.git/*' | wc -l)
+          echo "Found $count markdown files"
+          [ "$count" -gt 0 ] || exit 1
+      - name: Verify portfolio config
+        run: |
+          python -c "
+          import json, sys
+          cfg = json.load(open('portfolio/config.json'))
+          assert 'course' in cfg, 'Missing course key'
+          assert 'metrics' in cfg, 'Missing metrics key'
+          assert 'skills' in cfg, 'Missing skills key'
+          assert cfg['metrics']['unit_tests'] >= 24, f'Expected 24+ tests, got {cfg[\"metrics\"][\"unit_tests\"]}'
+          print('✅ Portfolio config validated')
+          "

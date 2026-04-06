@@ -15,7 +15,9 @@
 
 This portfolio documents 6 weeks of intensive Rust fundamentals and security-tool development in a postgraduate setting, emphasizing **memory-safe systems programming** and a **defensive security mindset**. It demonstrates the ability to learn a systems language from scratch, write clean idiomatic code, and think critically about tool architecture — skills that transfer directly to security engineering roles.
 
-📊 **At a Glance:** 3 Cargo projects · ~423 lines of Rust · 9 unit tests · 20+ Mermaid diagrams · 1 security case study (keylogger analysis) · Full CI/CD pipeline
+> **For security employers:** This portfolio shows a developer who understands *why* memory-safe languages matter for security tooling — not just syntax, but the ownership model, CWE vulnerability mapping, and defensive architecture. The Rust code compiles with zero warnings, passes 24 unit tests, and the keylogger case study demonstrates real systems-level analysis of Linux input subsystems, signal handling, and thread-safe shared state.
+
+📊 **At a Glance:** 3 Cargo projects · ~423 lines of Rust · 24 unit tests · 21 Mermaid diagrams · 1 security case study (keylogger analysis) · Full CI/CD pipeline
 
 ---
 
@@ -74,6 +76,38 @@ graph LR
 ---
 
 ## Repository Navigation
+
+```mermaid
+graph TD
+    ROOT["📁 407-Tool-Development"] --> CC["📁 CC/Winter 2025/CSEC Tool Development"]
+    ROOT --> DOCS["📁 docs/"]
+    ROOT --> PORT["📁 portfolio/"]
+    ROOT --> SCRIPTS["📁 scripts/ (PM automation)"]
+    ROOT --> GH["📁 .github/workflows/"]
+
+    CC --> README_C["📄 README.md (Course Entry)"]
+    CC --> WEEKS["📄 WEEKS_1-6 Summary"]
+    CC --> MIDTERM["📄 MIDTERM_PROJECT"]
+    CC --> FINAL["📄 FINAL_PROJECT"]
+    CC --> KEYLOG["🔒 KEYLOGGER_STUDY"]
+    CC --> EVIDENCE["📄 EVIDENCE_INDEX"]
+    CC --> ASSIGN["📁 assignments/ (3 files)"]
+    CC --> RSCRIPTS["📁 scripts/ (3 Cargo projects)"]
+    CC --> SCREENSHOTS["📁 screenshots/"]
+
+    RSCRIPTS --> HV1["🦀 hangman_v1"]
+    RSCRIPTS --> HR["🦀 hangman_refined"]
+    RSCRIPTS --> GG["🦀 guessing_game"]
+
+    GH --> CICD["8 Workflows"]
+
+    style ROOT fill:#2d3748,color:#fff
+    style CC fill:#2b6cb0,color:#fff
+    style KEYLOG fill:#c53030,color:#fff
+    style RSCRIPTS fill:#38a169,color:#fff
+```
+
+### Directory Tree (Detail)
 
 ```
 407-Tool-Development/

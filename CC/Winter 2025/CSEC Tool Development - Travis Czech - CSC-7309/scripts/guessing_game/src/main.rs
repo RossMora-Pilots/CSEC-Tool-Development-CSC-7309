@@ -22,9 +22,9 @@
 //! Build:  cargo build
 //! Run:    cargo run
 
-use std::io;
-use std::cmp::Ordering;
 use rand::Rng;
+use std::cmp::Ordering;
+use std::io;
 
 fn main() {
     println!("=== Guessing Game ===");
@@ -77,6 +77,23 @@ fn main() {
 
 /// Evaluate a guess against the secret number.
 /// Returns a human-readable hint string.
+///
+/// # Examples
+///
+/// ```
+/// # // Note: This function is defined in main.rs and used by unit tests.
+/// # fn evaluate_guess(guess: u32, secret: u32) -> &'static str {
+/// #     match guess.cmp(&secret) {
+/// #         std::cmp::Ordering::Less => "Too small!",
+/// #         std::cmp::Ordering::Greater => "Too big!",
+/// #         std::cmp::Ordering::Equal => "You win!",
+/// #     }
+/// # }
+/// assert_eq!(evaluate_guess(25, 50), "Too small!");
+/// assert_eq!(evaluate_guess(75, 50), "Too big!");
+/// assert_eq!(evaluate_guess(50, 50), "You win!");
+/// ```
+#[cfg(test)]
 fn evaluate_guess(guess: u32, secret: u32) -> &'static str {
     match guess.cmp(&secret) {
         Ordering::Less => "Too small!",

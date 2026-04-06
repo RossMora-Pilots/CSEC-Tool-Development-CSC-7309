@@ -142,3 +142,14 @@ Approximately 1 hour for the initial tutorial walkthrough, plus 30 minutes to ad
 ## Attribution
 
 Tutorial design: The Rust Programming Language (official book), Chapter 2. Course integration by Travis Czech (CSC-7309, Week 5). Student implementation and writeup by Ross Moravec.
+
+## Competencies Achieved
+
+- [x] Read user input from stdin with `io::stdin().read_line()`
+- [x] Handle parse errors gracefully with `match` on `Result<T, E>` (no panics)
+- [x] Use exhaustive pattern matching on `Ordering` enum
+- [x] Implement loop control flow (`loop { ... break }`)
+- [x] Apply variable shadowing for type conversion
+- [x] Integrate an external crate (`rand`) via Cargo
+- [x] Extend a tutorial with custom features (attempt counter)
+- [x] Connect input validation patterns to security tool requirements

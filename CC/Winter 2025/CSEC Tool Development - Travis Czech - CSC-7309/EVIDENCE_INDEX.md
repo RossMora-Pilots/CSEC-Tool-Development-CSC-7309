@@ -43,14 +43,19 @@ This index maps portfolio artifacts (code, summaries, transcripts, assignments) 
 |---|---|---|
 | Course progression flowchart | Root [README.md](../../../README.md) | `graph LR` |
 | Skills mindmap | Root [README.md](../../../README.md) | `mindmap` |
+| Repository navigation | Root [README.md](../../../README.md) | `graph TD` |
 | Ownership & borrowing model | [WEEKS_1-6 Summary](WEEKS_1-6_RUST_FUNDAMENTALS_SUMMARY.md#ownership--borrowing-visual-model) | `graph TD` |
 | Hangman program flow | [MIDTERM_PROJECT_SUMMARY.md](MIDTERM_PROJECT_SUMMARY.md#program-flow) | `graph TD` |
 | Hangman state machine | [MIDTERM_PROJECT_SUMMARY.md](MIDTERM_PROJECT_SUMMARY.md#state-machine) | `stateDiagram-v2` |
 | v1 → Refined comparison | [MIDTERM_PROJECT_SUMMARY.md](MIDTERM_PROJECT_SUMMARY.md#v1--refined-changes-improvements) | `graph LR` |
 | Hangman data flow | [MIDTERM_PROJECT_SUMMARY.md](MIDTERM_PROJECT_SUMMARY.md#data-flow) | `graph TD` |
+| Learning timeline | [FINAL_PROJECT](FINAL_PROJECT_TOOL_DEVELOPMENT.md#learning-timeline) | `gantt` |
+| Methodology flow | [FINAL_PROJECT](FINAL_PROJECT_TOOL_DEVELOPMENT.md#instructor-methodology-flow) | `graph LR` |
 | Skills proficiency levels | [FINAL_PROJECT](FINAL_PROJECT_TOOL_DEVELOPMENT.md#skills-inventory--validated-to-week-6) | `graph LR` |
+| Skill distribution | [FINAL_PROJECT](FINAL_PROJECT_TOOL_DEVELOPMENT.md#skill-acquisition-distribution) | `pie` |
 | Keylogger architecture | [KEYLOGGER_STUDY_WEEK3.md](KEYLOGGER_STUDY_WEEK3.md#architecture-overview) | `graph TD` |
-| Keylogger course context | [KEYLOGGER_STUDY_WEEK3.md](KEYLOGGER_STUDY_WEEK3.md#relationship-to-other-course-content) | `graph LR` |
+| Keylogger event loop | [KEYLOGGER_STUDY_WEEK3.md](KEYLOGGER_STUDY_WEEK3.md#event-loop-sequence) | `sequenceDiagram` |
+| Keylogger course context | [KEYLOGGER_STUDY_WEEK3.md](KEYLOGGER_STUDY_WEEK3.md#curriculum-context) | `graph LR` |
 | Bug Hunt debug flow | [Assignment01_BugHunt.md](assignments/Assignment01_BugHunt.md#debugging-process-applied) | `graph TD` |
 | Lab dependency chain | [Labs_1-3_Summary.md](assignments/Labs_1-3_Summary.md#relationship-to-portfolio-artifacts) | `graph TD` |
 | Toolchain setup flow | [WEEKS_1-6 Summary](WEEKS_1-6_RUST_FUNDAMENTALS_SUMMARY.md#week-1) | `graph LR` |
@@ -104,4 +109,4 @@ This index maps portfolio artifacts (code, summaries, transcripts, assignments) 
 | `cargo test` (hangman_v1) | 8/8 unit tests pass | ✅ Added in remediation cycle 2 |
 | `cargo test` (guessing_game) | 7/7 unit tests pass | ✅ Added in remediation cycle 2 |
 | `rust-check.yml` CI workflow | Automated compilation + test on push | ✅ Workflow configured |
-| Mermaid diagrams | Visual evidence of architecture & flow | ✅ 16 diagrams in portfolio |
+| Mermaid diagrams | Visual evidence of architecture & flow | ✅ 21 diagrams in portfolio |
