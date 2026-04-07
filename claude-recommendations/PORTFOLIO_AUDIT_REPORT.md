@@ -76,7 +76,7 @@ All 47 specific modifications (diagram insertions, API migrations, content rewri
 | Week 4 Part 2 transcribed | ✅ | 79 lines at D:\CC source location |
 | Week 3 Part 2 unrecoverable | ✅ | Corrupt moov atom (confirmed via ffprobe) |
 | Week 3 Part 3 no speech | ✅ | Confirmed via Whisper + volume analysis |
-| GitHub repo public | ✅ | github.com/RossMora/407-Tool-Development |
+| GitHub repo public | ✅ | github.com/RossMora/CSEC-Tool-Development-CSC-7309 |
 | 7 topics set | ✅ | API verification |
 | Branch protection enabled | ✅ | Force push blocked, deletions blocked |
 | Attribution request created | ✅ | docs/INSTRUCTOR_ATTRIBUTION_REQUEST.md |
