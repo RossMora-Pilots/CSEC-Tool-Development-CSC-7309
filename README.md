@@ -2,10 +2,10 @@
 
 **Student Portfolio by Ross Moravec** | Instructor: Travis Czech | Cambrian College
 
-[![CI](https://github.com/RossMora/407-tool-development/actions/workflows/ci.yml/badge.svg)](https://github.com/RossMora/407-tool-development/actions/workflows/ci.yml)
-[![Portfolio CI](https://github.com/RossMora/407-tool-development/actions/workflows/portfolio-ci.yml/badge.svg)](https://github.com/RossMora/407-tool-development/actions/workflows/portfolio-ci.yml)
-[![Markdown Lint](https://github.com/RossMora/407-tool-development/actions/workflows/markdownlint.yml/badge.svg)](https://github.com/RossMora/407-tool-development/actions/workflows/markdownlint.yml)
-[![Gitleaks](https://github.com/RossMora/407-tool-development/actions/workflows/gitleaks.yml/badge.svg)](https://github.com/RossMora/407-tool-development/actions/workflows/gitleaks.yml)
+[![CI](https://github.com/RossMora-Pilots/CSEC-Tool-Development-CSC-7309/actions/workflows/ci.yml/badge.svg)](https://github.com/RossMora-Pilots/CSEC-Tool-Development-CSC-7309/actions/workflows/ci.yml)
+[![Portfolio CI](https://github.com/RossMora-Pilots/CSEC-Tool-Development-CSC-7309/actions/workflows/portfolio-ci.yml/badge.svg)](https://github.com/RossMora-Pilots/CSEC-Tool-Development-CSC-7309/actions/workflows/portfolio-ci.yml)
+[![Markdown Lint](https://github.com/RossMora-Pilots/CSEC-Tool-Development-CSC-7309/actions/workflows/markdownlint.yml/badge.svg)](https://github.com/RossMora-Pilots/CSEC-Tool-Development-CSC-7309/actions/workflows/markdownlint.yml)
+[![Gitleaks](https://github.com/RossMora-Pilots/CSEC-Tool-Development-CSC-7309/actions/workflows/gitleaks.yml/badge.svg)](https://github.com/RossMora-Pilots/CSEC-Tool-Development-CSC-7309/actions/workflows/gitleaks.yml)
 
 > **Public portfolio** documenting learning outcomes, Rust code artifacts, and weekly synthesis from **CSEC Tool Development (CSC-7309)** — a Winter 2025 course in the Postgraduate Cybersecurity Certificate at **Cambrian College** (Sudbury, Ontario), taught by **Instructor Travis Czech**.
 
@@ -200,4 +200,4 @@ Educational portfolio — original lecture content remains © Travis Czech / Cam
 
 **Ross Moravec** — [GitHub Profile](https://github.com/RossMora)
 
-Questions about this portfolio? [Open an issue](https://github.com/RossMora/407-tool-development/issues) or reach out via GitHub.
+Questions about this portfolio? [Open an issue](https://github.com/RossMora-Pilots/CSEC-Tool-Development-CSC-7309/issues) or reach out via GitHub.

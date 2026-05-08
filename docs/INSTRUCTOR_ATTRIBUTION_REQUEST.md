@@ -11,7 +11,7 @@
 
 I have created a public GitHub portfolio repository documenting my coursework from **CSEC Tool Development (CSC-7309)**, Winter 2025 at Cambrian College. The repository is hosted at:
 
-> **https://github.com/RossMora/CSEC-Tool-Development-CSC-7309**
+> **https://github.com/RossMora-Pilots/CSEC-Tool-Development-CSC-7309**
 
 This email requests your confirmation and/or preference regarding how course materials are attributed and whether any content should be restricted.
 

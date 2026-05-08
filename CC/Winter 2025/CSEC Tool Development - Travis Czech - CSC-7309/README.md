@@ -2,7 +2,7 @@
 
 **Student Portfolio by Ross Moravec** | Instructor: Travis Czech | Cambrian College, Winter 2025
 
-![Portfolio CI](https://github.com/RossMora/407-tool-development/actions/workflows/portfolio-ci.yml/badge.svg)
+![Portfolio CI](https://github.com/RossMora-Pilots/CSEC-Tool-Development-CSC-7309/actions/workflows/portfolio-ci.yml/badge.svg)
 
 > **Start Here:** course overview, learning outcomes, and navigation for the CSEC Tool Development (CSC-7309) public portfolio.
 
