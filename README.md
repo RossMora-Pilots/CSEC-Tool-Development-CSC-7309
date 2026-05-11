@@ -198,6 +198,6 @@ Educational portfolio — original lecture content remains © Travis Czech / Cam
 
 ## Contact
 
-**Ross Moravec** — [GitHub Profile](https://github.com/RossMora)
+**Ross Moravec** — [GitHub Profile](https://github.com/RossMora-Pilots)
 
 Questions about this portfolio? [Open an issue](https://github.com/RossMora-Pilots/CSEC-Tool-Development-CSC-7309/issues) or reach out via GitHub.
