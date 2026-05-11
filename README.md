@@ -9,6 +9,9 @@
 
 > **Public portfolio** documenting learning outcomes, Rust code artifacts, and weekly synthesis from **CSEC Tool Development (CSC-7309)** — a Winter 2025 course in the Postgraduate Cybersecurity Certificate at **Cambrian College** (Sudbury, Ontario), taught by **Instructor Travis Czech**.
 
+
+> ✅ **Course complete (Winter 2025).** All assigned coursework delivered; this portfolio is the final published state.
+
 ---
 
 ## Why This Portfolio?
