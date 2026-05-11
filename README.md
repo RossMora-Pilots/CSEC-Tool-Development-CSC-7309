@@ -14,6 +14,9 @@
 
 ---
 
+> 📧 [ross@moravec.dev](mailto:ross@moravec.dev) · 🔗 [LinkedIn /in/rossmoravec](https://www.linkedin.com/in/rossmoravec/) · 📁 [Portfolio Umbrella](https://github.com/RossMora-Pilots/cybersecurity-postgraduate-certificate-cambrian-college-ontario)
+
+
 ## Why This Portfolio?
 
 This portfolio documents 6 weeks of intensive Rust fundamentals and security-tool development in a postgraduate setting, emphasizing **memory-safe systems programming** and a **defensive security mindset**. It demonstrates the ability to learn a systems language from scratch, write clean idiomatic code, and think critically about tool architecture — skills that transfer directly to security engineering roles.
